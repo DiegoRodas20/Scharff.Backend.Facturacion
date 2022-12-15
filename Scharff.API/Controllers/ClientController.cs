@@ -1,43 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Scharff.Application.Queries.Client.GetClientById;
+using Scharff.Domain.Entities;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Scharff.API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class ClientController : ControllerBase
+    public class ClientController : Controller
     {
-        // GET: api/<ClientController>
+        private readonly IMediator _mediator;
+        public ClientController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        [SwaggerResponse(200, "Retorna los clientes", typeof(ClientModel))]
+        [SwaggerResponse(204, "No se encontraron clientes")]
+        [SwaggerResponse(400, "Ocurrio un error de validacion")]
+        public async Task<IActionResult> GetClientByID(int idClient)
         {
-            return new string[] { "value1", "value2" };
-        }
+            var result = await _mediator.Send(new GetClientByIdQuery());
 
-        // GET api/<ClientController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<ClientController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<ClientController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ClientController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            if (result == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok(result);
+            }
         }
     }
 }

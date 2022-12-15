@@ -10,4 +10,13 @@
     <Folder Include="Commands\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="11.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Scharff.Domain\Scharff.Domain.csproj" />
+    <ProjectReference Include="..\Scharff.Infrastructure\Scharff.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
