@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Scharff.Domain.Entities;
+using Scharff.Infrastructure.Repositories.Client.RegisterClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,31 @@ namespace Scharff.Application.Commands.Client.RegisterClient
 {
     public class RegisterClientCommandHandler : IRequestHandler<RegisterClientCommand, ResponseModel>
     {
-        public RegisterClientCommandHandler() { 
-        }
-        public Task<ResponseModel> Handle(RegisterClientCommand request, CancellationToken cancellationToken)
+        private readonly IRegisterClientRepository _registerClientRepository;
+
+        public RegisterClientCommandHandler(IRegisterClientRepository registerClientRepository)
         {
-            throw new NotImplementedException();
+            _registerClientRepository = registerClientRepository;
+        }
+
+        public async Task<ResponseModel> Handle(RegisterClientCommand request, CancellationToken cancellationToken)
+        {
+            ClientModel model = new()
+            {
+                TypeDocumentIdenty = request.TypeDocumentIdenty,
+                IdentificationNumber = request.IdentificationNumber,
+                BusinessName = request.BusinessName,
+                Phone = request.Phone,
+                TradeName = request.TradeName,
+                TypeCurrency = request.TypeCurrency,
+                BusinessGroup = request.BusinessGroup,
+                EconomicSector = request.EconomicSector,
+                Holding = request.Holding,
+                Segmentation = request.Segmentation
+            };
+
+            var result = await _registerClientRepository.RegisterClient(model);
+            return result;
         }
     }
 }

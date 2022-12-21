@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scharff.Domain.Entities;
+using System;
 using System.Data;
 using System.Transactions;
 

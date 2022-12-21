@@ -28,7 +28,28 @@ namespace Scharff.Infrastructure.Repositories.Client.RegisterClient
             {
                 try
                 {
-                    string insert = @"INSERT INTO CLIENTE VALUES ";
+                    string insert = @"  INSERT INTO CLIENTE 
+                                            tipoDocumentoIdentidad, 
+                                            numeroDocumentoIdentidad,
+                                            razonSocial,
+                                            telefono,
+                                            nombreComercial,
+                                            tipoMoneda_parametro,
+                                            grupoEmpresarial_parametro,
+                                            codigoSector_parametro,
+                                            holding_parametro,
+                                            codigoSegmentacion_parametro
+                                        VALUES 
+                                            @TypeDocumentIdenty, 
+                                            @IdentificationNumber, 
+                                            @BusinessName, 
+                                            @Phone, 
+                                            @TradeName, 
+                                            @TypeCurrency, 
+                                            @BusinessGroup, 
+                                            @EconomicSector,
+                                            @Holding,                                            
+                                            @Segmentation;";
 
                     int hasInsert = await connection.ExecuteAsync(insert, cliente);
                     if (hasInsert <= 0)

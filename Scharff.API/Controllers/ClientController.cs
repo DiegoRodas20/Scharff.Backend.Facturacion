@@ -6,7 +6,6 @@ using Scharff.Application.Commands.Client.RegisterClient;
 using Scharff.Application.Commands.Client.UpdateClient;
 using Scharff.Application.Queries.Client.GetAllClients;
 using Scharff.Application.Queries.Client.GetClientById;
-using Scharff.Application.Queries.Client.UpdateClientStatus;
 using Scharff.Domain.Entities;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -71,43 +70,43 @@ namespace Scharff.API.Controllers
         }
 
 
-        [HttpPut(template: "{idClient}")]
-        [SwaggerOperation("Actualizar Cliente")]
-        public async Task<IActionResult> UpdateClient(int idClient, [FromBody] UpdateClientCommand request)
-        {
-            request.id = idClient;
-            var result = await _mediator.Send(request);
-            return Ok(result);
-        }
+        //[HttpPut(template: "{idClient}")]
+        //[SwaggerOperation("Actualizar Cliente")]
+        //public async Task<IActionResult> UpdateClient(int idClient, [FromBody] UpdateClientCommand request)
+        //{
+        //    request.id = idClient;
+        //    var result = await _mediator.Send(request);
+        //    return Ok(result);
+        //}
 
 
-        [HttpPut(template: "{idClient}")]
-        [SwaggerOperation("Inhabilitar Cliente")]
-        public async Task<IActionResult> DisableClient(int idClient)
-        {
-            DisableClientCommand request = new() { IdClient = idClient };
-            var result = await _mediator.Send(request);
-            return Ok(result);
-        }
+        //[HttpPut(template: "{idClient}")]
+        //[SwaggerOperation("Inhabilitar Cliente")]
+        //public async Task<IActionResult> DisableClient(int idClient)
+        //{
+        //    DisableClientCommand request = new() { IdClient = idClient };
+        //    var result = await _mediator.Send(request);
+        //    return Ok(result);
+        //}
 
 
-        [HttpPut(template: "{idClient}")]
-        [SwaggerOperation("Habilitar Cliente")]
-        public async Task<IActionResult> EnableClient(int idClient)
-        {
-            EnableClientCommand request = new() { IdClient = idClient };
-            var result = await _mediator.Send(request);
-            return Ok(result);
-        }
+        //[HttpPut(template: "{idClient}")]
+        //[SwaggerOperation("Habilitar Cliente")]
+        //public async Task<IActionResult> EnableClient(int idClient)
+        //{
+        //    EnableClientCommand request = new() { IdClient = idClient };
+        //    var result = await _mediator.Send(request);
+        //    return Ok(result);
+        //}
 
 
-        [HttpPost]
-        [SwaggerOperation("Validar cliente")]
-        public async Task<IActionResult> ValidateClient([FromBody] RegisterClientCommand request)
-        {
-            var result = await _mediator.Send(request);
-            return Ok(result);
-        }
+        //[HttpPost]
+        //[SwaggerOperation("Validar cliente")]
+        //public async Task<IActionResult> ValidateClient([FromBody] RegisterClientCommand request)
+        //{
+        //    var result = await _mediator.Send(request);
+        //    return Ok(result);
+        //}
 
     }
 }
