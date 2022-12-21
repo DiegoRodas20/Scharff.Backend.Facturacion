@@ -21,6 +21,7 @@ namespace JKM.UTILITY.Utils
                 int isValid = DateTime.Compare(newDate, compare);
                 if (isValid < 0) return false;
             }
+
             if (min != null)
             {
                 DateTime compare = max ?? DateTime.Now;
