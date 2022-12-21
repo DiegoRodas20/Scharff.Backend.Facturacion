@@ -6,6 +6,7 @@ using Scharff.Application.Commands.Client.RegisterClient;
 using Scharff.Application.Commands.Client.UpdateClient;
 using Scharff.Application.Queries.Client.GetAllClients;
 using Scharff.Application.Queries.Client.GetClientById;
+using Scharff.Application.Queries.Client.UpdateClientStatus;
 using Scharff.Domain.Entities;
 using Swashbuckle.AspNetCore.Annotations;
 
