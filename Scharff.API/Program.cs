@@ -22,7 +22,6 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
         });
     });
-
 builder.Services.AddTransient(typeof(IGetClientById), typeof(GetClientById));
 builder.Services.AddTransient(typeof(IRegisterClientRepository), typeof(RegisterClientRepository));
 builder.Services.AddTransient(typeof(IGetAllClients), typeof(GetAllClients));
@@ -37,7 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
