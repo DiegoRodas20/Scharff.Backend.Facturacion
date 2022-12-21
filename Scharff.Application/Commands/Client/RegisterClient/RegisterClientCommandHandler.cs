@@ -22,16 +22,16 @@ namespace Scharff.Application.Commands.Client.RegisterClient
         {
             ClientModel model = new()
             {
-                TypeDocumentIdenty = request.TypeDocumentIdenty,
-                IdentificationNumber = request.IdentificationNumber,
-                BusinessName = request.BusinessName,
+                TypeDocumentIdentity = request.TypeDocumentIdentity,
+                NumberDocumentIdentity = request.NumberDocumentIdentity,
+                CompanyName = request.CompanyName,
                 Phone = request.Phone,
                 TradeName = request.TradeName,
                 TypeCurrency = request.TypeCurrency,
                 BusinessGroup = request.BusinessGroup,
-                EconomicSector = request.EconomicSector,
+                CodeEconomicSector = request.CodeEconomicSector,
                 Holding = request.Holding,
-                Segmentation = request.Segmentation
+                CodeSegmentation = request.CodeSegmentation
             };
 
             var result = await _registerClientRepository.RegisterClient(model);

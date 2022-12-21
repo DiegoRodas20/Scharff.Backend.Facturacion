@@ -40,16 +40,16 @@ namespace Scharff.Infrastructure.Repositories.Client.RegisterClient
                                             holding_parametro,
                                             codigoSegmentacion_parametro
                                         VALUES 
-                                            @TypeDocumentIdenty, 
-                                            @IdentificationNumber, 
-                                            @BusinessName, 
+                                            @TypeDocumentIdentity, 
+                                            @NumberDocumentIdentity, 
+                                            @CompanyName, 
                                             @Phone, 
                                             @TradeName, 
                                             @TypeCurrency, 
                                             @BusinessGroup, 
-                                            @EconomicSector,
+                                            @CodeEconomicSector,
                                             @Holding,                                            
-                                            @Segmentation;";
+                                            @CodeSegmentation;";
 
                     int hasInsert = await connection.ExecuteAsync(insert, cliente);
                     if (hasInsert <= 0)
