@@ -39,7 +39,6 @@ namespace Scharff.API.Controllers
             }
         }
 
-
         [HttpGet(template: "{idClient}")]
         [SwaggerResponse(200, "Retorna un cliente en base a su ID", typeof(ClientModel))]
         [SwaggerResponse(204, "No se encontro el cliente")]
@@ -59,7 +58,6 @@ namespace Scharff.API.Controllers
                 return Ok(result);
             }
         }
-
 
         [HttpPost]
         [SwaggerOperation("Registrar cliente")]
