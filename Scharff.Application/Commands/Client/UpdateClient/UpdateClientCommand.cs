@@ -1,6 +1,12 @@
-﻿namespace Scharff.Domain.Entities
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Scharff.Application.Commands.Client.UpdateClient
 {
-    public class ClientModel
+    public class UpdateClientCommand
     {
         public int id { get; set; }
         public int tipoCliente_parametro { get; set; }

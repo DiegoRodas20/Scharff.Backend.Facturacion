@@ -1,6 +1,9 @@
-﻿namespace Scharff.Domain.Entities
+﻿using MediatR;
+using Scharff.Domain.Entities;
+
+namespace Scharff.Application.Commands.Client.RegisterClient
 {
-    public class ClientModel
+    public class RegisterClientCommand : IRequest<ResponseModel>
     {
         public int id { get; set; }
         public int tipoCliente_parametro { get; set; }
