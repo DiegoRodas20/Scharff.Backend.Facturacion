@@ -56,10 +56,22 @@ namespace Scharff.API
             });
 
             //DataBase
-            string connection = Configuration.GetSection("ConnectionStrings").GetValue<string>("Scharff_BD");
-            services.AddTransient<IDbConnection>(x => new NpgsqlConnection(connection));
+            services.AddTransient<IDbConnection>(x => new NpgsqlConnection(Configuration.GetConnectionString("Scharff_BD")));
 
-            services.AddTransient(typeof(IGetClientById), typeof(GetClientById));
+            //Inyecciones de Infrastructure
+            List<Type> repositories = infrastructure.GetTypes()
+                .Where(g => g.Name.IndexOf("Repo") >= 0)
+                .ToList();
+
+            for (int i = 0; i < repositories.Count; i += 2)
+            {
+                Type repo1 = repositories[i], repo2 = repositories[i + 1];
+                bool interfazBool = repositories[i].Attributes.HasFlag(TypeAttributes.Abstract);
+                if (interfazBool)
+                    services.AddTransient(repo1, repo2);
+                else
+                    services.AddTransient(repo2, repo1);
+            }
 
             //MediatR
             services.AddMediatR(application);

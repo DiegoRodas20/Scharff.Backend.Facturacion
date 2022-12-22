@@ -21,6 +21,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IDbConnection>(x => new NpgsqlConnection(builder.Configuration.GetConnectionString("Scharff_BD")));
 
+builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowAll", p =>
+        {
+            p.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+    });
 builder.Services.AddTransient(typeof(IGetClientById), typeof(GetClientById));
 builder.Services.AddTransient(typeof(IRegisterClientRepository), typeof(RegisterClientRepository));
 builder.Services.AddTransient(typeof(IGetAllClients), typeof(GetAllClients));
@@ -48,7 +57,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
