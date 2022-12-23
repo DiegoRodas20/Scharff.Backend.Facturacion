@@ -3,7 +3,7 @@ using Scharff.Domain.Entities;
 
 namespace Scharff.Application.Commands.Client.RegisterClient
 {
-    public class RegisterClientCommand : IRequest<ResponseModel>
+    public class RegisterClientCommand : IRequest<int>
     {
         public int TypeDocumentIdentity { get; set; }
         public string? NumberDocumentIdentity { get; set; }

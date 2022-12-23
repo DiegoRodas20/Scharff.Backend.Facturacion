@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Scharff.API.Utils.Models;
 using Scharff.Application.Commands.Contact.DeleteContact;
 using Scharff.Application.Commands.Contact.RegisterContact;
 using Scharff.Application.Commands.Contact.UpdateContact;
@@ -34,11 +35,15 @@ namespace Scharff.API.Controllers
 
             if (result == null)
             {
-                return BadRequest();
+                throw new Exception($"No se encontraro la direccion con el id {id}.");
             }
             else
             {
-                return Ok(result);
+                return Ok(new CustomResponse<DirectionModel>(
+                        $"Se encontro la direccion con id:{result.Id}.",
+                        result,
+                        null
+                        ));
             }
         }
         [HttpPost]

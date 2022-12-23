@@ -9,6 +9,6 @@ namespace Scharff.Infrastructure.Repositories.Client.RegisterClient
 {
     public interface IRegisterClientRepository
     {
-        Task<ResponseModel> RegisterClient(ClientModel cliente);
+        Task<int> RegisterClient(ClientModel cliente);
     }
 }

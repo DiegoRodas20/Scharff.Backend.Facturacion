@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Npgsql;
+using Scharff.API.Utils.GlobalHandlers;
 using Scharff.Infrastructure.Queries.Client.GetAllClients;
 using Scharff.Infrastructure.Queries.Client.GetClientById;
 using Scharff.Infrastructure.Queries.Contact.GetContactById;
@@ -61,6 +62,7 @@ app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseMiddleware<GlobalErrorHandler>();
 
 app.Run();
 

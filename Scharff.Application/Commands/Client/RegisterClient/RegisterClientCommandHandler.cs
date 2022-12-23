@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Scharff.Domain.Entities;
+using Scharff.Infrastructure.Queries.Client.GetAllClients;
 using Scharff.Infrastructure.Repositories.Client.RegisterClient;
+using Scharff.Domain.Utils.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +11,20 @@ using System.Threading.Tasks;
 
 namespace Scharff.Application.Commands.Client.RegisterClient
 {
-    public class RegisterClientCommandHandler : IRequestHandler<RegisterClientCommand, ResponseModel>
+    public class RegisterClientCommandHandler : IRequestHandler<RegisterClientCommand, int>
     {
         private readonly IRegisterClientRepository _registerClientRepository;
-
-        public RegisterClientCommandHandler(IRegisterClientRepository registerClientRepository)
+        private readonly IGetAllClients _getAllClients;
+        public RegisterClientCommandHandler(
+            IRegisterClientRepository registerClientRepository,
+            IGetAllClients getAllClients
+            )
         {
             _registerClientRepository = registerClientRepository;
+            _getAllClients = getAllClients;
         }
 
-        public async Task<ResponseModel> Handle(RegisterClientCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(RegisterClientCommand request, CancellationToken cancellationToken)
         {
             ClientModel model = new()
             {
@@ -33,6 +39,12 @@ namespace Scharff.Application.Commands.Client.RegisterClient
                 holding_parametro = request.Holding,
                 codigoSegmentacion_parametro = request.CodeSegmentation
             };
+
+            //Validacion del documento de identidad
+            var clientes = await _getAllClients.GetAllClient();
+            if (clientes.Any(cliente => cliente.numeroDocumentoIdentidad == model.numeroDocumentoIdentidad)) throw new ValidationException("El numero de documento indicado ya esta registrado");
+            //var client = await _getAllClientByNumDoc(model.numeroDocumentoIdentidad);
+            //if(client != null) throw new ValidationException("El numero de documento indicado ya esta registrado");
 
             var result = await _registerClientRepository.RegisterClient(model);
             return result;

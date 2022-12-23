@@ -21,7 +21,7 @@ namespace Scharff.Infrastructure.Repositories.Client.RegisterClient
         {
             _connection = connection;
         }
-        public async Task<ResponseModel> RegisterClient(ClientModel cliente)
+        public async Task<int> RegisterClient(ClientModel cliente)
         {
             using (TransactionScope trans = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             using (IDbConnection connection = new NpgsqlConnection(_connection.ConnectionString))
@@ -40,22 +40,20 @@ namespace Scharff.Infrastructure.Repositories.Client.RegisterClient
                                             ""holding_parametro"",
                                             ""codigoSegmentacion_parametro"")
                                         VALUES 
-                                            (@TypeDocumentIdentity, 
-                                            @NumberDocumentIdentity, 
-                                            @CompanyName, 
-                                            @Phone, 
-                                            @TradeName, 
-                                            @TypeCurrency, 
-                                            @BusinessGroup, 
-                                            @CodeEconomicSector,
-                                            @Holding,                                            
-                                            @CodeSegmentation);";
+                                            (@tipoDocumentoIdentidad, 
+                                            @numeroDocumentoIdentidad, 
+                                            @razonSocial, 
+                                            @telefono, 
+                                            @nombreComercial, 
+                                            @tipoMoneda_parametro, 
+                                            @grupoEmpresarial_parametro, 
+                                            @codigoSector_parametro,
+                                            @holding_parametro,                                            
+                                            @codigoSegmentacion_parametro) RETURNING Id;";
 
-                    int hasInsert = await connection.ExecuteAsync(insert, cliente);
-                    if (hasInsert <= 0)
-                        Handlers.ExceptionClose(connection, "Ocurrió un error al insertar el cliente");
+                    int idInsert = await connection.ExecuteScalarAsync<int>(insert, cliente);
 
-                    return Handlers.CloseConnection(connection, trans, "Registro exitoso");
+                    return idInsert;
                 }
                 catch (NpgsqlException err)
                 {

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Scharff.API.Utils.Models;
 using Scharff.Application.Commands.Client.DisableClient;
 using Scharff.Application.Commands.Client.EnableClient;
 using Scharff.Application.Commands.Client.RegisterClient;
@@ -22,7 +23,7 @@ namespace Scharff.API.Controllers
         }
 
         [HttpGet]
-        [SwaggerResponse(200, "Retorna el listado general de clientes", typeof(List<ClientModel>))]
+        [SwaggerResponse(200, "Retorna el listado general de clientes", typeof(CustomResponse<List<ClientModel>>))]
         [SwaggerResponse(204, "No se encontraron clientes")]
         [SwaggerResponse(400, "Ocurrio un error de validacion")]
         public async Task<IActionResult> GetAllClients()
@@ -31,16 +32,20 @@ namespace Scharff.API.Controllers
 
             if (result == null)
             {
-                return BadRequest();
+                throw new Exception("No se encontraron clientes.");
             }
             else
             {
-                return Ok(result);
+
+                return Ok(new CustomResponse<List<ClientModel>>(
+                    $"Se encontraron {result.Count} clientes.",
+                    result
+                    ));
             }
         }
 
         [HttpGet(template: "{idClient}")]
-        [SwaggerResponse(200, "Retorna un cliente en base a su ID", typeof(ClientModel))]
+        [SwaggerResponse(200, "Retorna un cliente en base a su ID", typeof(CustomResponse<ClientModel>))]
         [SwaggerResponse(204, "No se encontro el cliente")]
         [SwaggerResponse(400, "Ocurrio un error de validacion")]
         public async Task<IActionResult> GetClientByID(int idClient)
@@ -51,11 +56,14 @@ namespace Scharff.API.Controllers
 
             if (result == null)
             {
-                return BadRequest();
+                throw new Exception("No se encontro un cliente con el id indicado.");
             }
             else
             {
-                return Ok(result);
+                return Ok(new CustomResponse<ClientModel>(
+                        $"Se encontraron el cliente con id:{result.id}.",
+                        result
+                        ));
             }
         }
 
@@ -64,7 +72,10 @@ namespace Scharff.API.Controllers
         public async Task<IActionResult> RegisterClient([FromBody] RegisterClientCommand request)
         {
             var result = await _mediator.Send(request);
-            return Ok(result);
+            return Ok(new CustomResponse<int>(
+                        $"Se inserto el cliente con id: {result}.",
+                        result
+                        ));
         }
 
 
