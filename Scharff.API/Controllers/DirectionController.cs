@@ -41,8 +41,7 @@ namespace Scharff.API.Controllers
             {
                 return Ok(new CustomResponse<DirectionModel>(
                         $"Se encontro la direccion con id:{result.Id}.",
-                        result,
-                        null
+                        result
                         ));
             }
         }
