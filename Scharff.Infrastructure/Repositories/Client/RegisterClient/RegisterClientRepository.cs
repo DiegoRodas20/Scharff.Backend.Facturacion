@@ -28,19 +28,19 @@ namespace Scharff.Infrastructure.Repositories.Client.RegisterClient
             {
                 try
                 {
-                    string insert = @"  INSERT INTO CLIENTE 
-                                            tipoDocumentoIdentidad, 
-                                            numeroDocumentoIdentidad,
-                                            razonSocial,
-                                            telefono,
-                                            nombreComercial,
-                                            tipoMoneda_parametro,
-                                            grupoEmpresarial_parametro,
-                                            codigoSector_parametro,
-                                            holding_parametro,
-                                            codigoSegmentacion_parametro
+                    string insert = @"INSERT INTO public.cliente 
+                                            (""tipoDocumentoIdentidad"", 
+                                            ""numeroDocumentoIdentidad"",
+                                            ""razonSocial"",
+                                            ""telefono"",
+                                            ""nombreComercial"",
+                                            ""tipoMoneda_parametro"",
+                                            ""grupoEmpresarial_parametro"",
+                                            ""codigoSector_parametro"",
+                                            ""holding_parametro"",
+                                            ""codigoSegmentacion_parametro"")
                                         VALUES 
-                                            @TypeDocumentIdentity, 
+                                            (@TypeDocumentIdentity, 
                                             @NumberDocumentIdentity, 
                                             @CompanyName, 
                                             @Phone, 
@@ -49,7 +49,7 @@ namespace Scharff.Infrastructure.Repositories.Client.RegisterClient
                                             @BusinessGroup, 
                                             @CodeEconomicSector,
                                             @Holding,                                            
-                                            @CodeSegmentation;";
+                                            @CodeSegmentation);";
 
                     int hasInsert = await connection.ExecuteAsync(insert, cliente);
                     if (hasInsert <= 0)
