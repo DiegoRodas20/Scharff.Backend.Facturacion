@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Scharff.Application.Queries.Contact.GetContactoById
 {
-    public class GetContactByIdQuery : IRequest<ContactModel>
+    public class GetContactByIdQuery : IRequest<List<ContactModel>>
     {
         public int IdClient { get; set; }
 

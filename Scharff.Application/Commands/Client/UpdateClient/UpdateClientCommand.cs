@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
 namespace Scharff.Application.Commands.Client.UpdateClient
 {
-    public class UpdateClientCommand
+    public class UpdateClientCommand : IRequest<int>
     {
         public int id { get; set; }
         public int tipoCliente_parametro { get; set; }

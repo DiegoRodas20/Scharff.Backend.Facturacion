@@ -21,7 +21,7 @@ namespace Scharff.Infrastructure.Repositories.Direction.RegisterDirection
         {
             _connection = connection;
         }
-        public async Task<ResponseModel> RegisterDirection(DirectionModel direction)
+        public async Task<int> RegisterDirection(DirectionModel direction)
         {
             using (TransactionScope trans = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             using (IDbConnection connection = new NpgsqlConnection(_connection.ConnectionString))
@@ -29,35 +29,18 @@ namespace Scharff.Infrastructure.Repositories.Direction.RegisterDirection
                 try
                 {
 
-        string insert = @"  INSERT INTO DIRECCION 
-                                            estado, 
-                                            tipoDireccion_parametro,
-                                            idCliente,
-                                            idUbigeo,
-                                            direccion,
-                                            codigoPostal,
-                                            fechaCreacion,
-                                            autorCreacion,
-                                            fechaModificacion,
-                                            autorModificacion
+                    string insert = @"  INSERT INTO DIRECCION 
+                                            (""tipoDireccion_parametro"",
+                                            ""idCliente"",
+                                            ""direccion"")
                                         VALUES 
-                                            @Status, 
-                                            @TypeDirectionParameter, 
-                                            @IdClient, 
-                                            @IdUbigeo, 
-                                            @Direction, 
-                                            @PostalCode, 
-                                            @CreationDate,
-                                            @AuthorCreation,                                            
-                                            @DateUpdate,
-                                            @AuthorUpdate;
-                                            ";
+                                            (@TypeDirectionParameter, 
+                                            @IdClient,
+                                            @Direction) RETURNING Id;";
 
-                    int hasInsert = await connection.ExecuteAsync(insert, direction);
-                    if (hasInsert <= 0)
-                        Handlers.ExceptionClose(connection, "Ocurrió un error al insertar la direccion");
-
-                    return Handlers.CloseConnection(connection, trans, "Registro exitoso");
+                    int idInsert = await connection.ExecuteScalarAsync<int>(insert, direction);
+                    trans.Complete();
+                    return idInsert;
                 }
                 catch (NpgsqlException err)
                 {

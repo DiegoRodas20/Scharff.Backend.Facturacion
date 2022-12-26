@@ -6,6 +6,7 @@ using Scharff.Infrastructure.Queries.Client.GetClientById;
 using Scharff.Infrastructure.Queries.Contact.GetContactById;
 using Scharff.Infrastructure.Queries.Direction.GetDirectionById;
 using Scharff.Infrastructure.Repositories.Client.RegisterClient;
+using Scharff.Infrastructure.Repositories.Client.UpdateClient;
 using Scharff.Infrastructure.Repositories.Contact.DeleteContact;
 using Scharff.Infrastructure.Repositories.Contact.RegisterContact;
 using Scharff.Infrastructure.Repositories.Contact.UpdateContact;
@@ -31,11 +32,12 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
         });
     });
-builder.Services.AddTransient(typeof(IGetClientById), typeof(GetClientById));
+builder.Services.AddTransient(typeof(IGetClientByIdQuery), typeof(GetClientByIdQuery));
 builder.Services.AddTransient(typeof(IRegisterClientRepository), typeof(RegisterClientRepository));
+builder.Services.AddTransient(typeof(IUpdateClientRepository), typeof(UpdateClientRepository));
 builder.Services.AddTransient(typeof(IGetAllClients), typeof(GetAllClients));
 
-builder.Services.AddTransient(typeof(IGetContactById), typeof(GetContactById));
+builder.Services.AddTransient(typeof(IGetContactByIdQuery), typeof(GetContactByIdQuery));
 builder.Services.AddTransient(typeof(IRegisterContactRepository), typeof(RegisterContactRepository));
 
 builder.Services.AddTransient(typeof(IUpdateContactRepository), typeof(UpdateContactRepository));

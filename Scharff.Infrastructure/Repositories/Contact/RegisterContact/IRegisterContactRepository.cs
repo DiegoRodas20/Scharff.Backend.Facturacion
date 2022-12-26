@@ -9,7 +9,7 @@ namespace Scharff.Infrastructure.Repositories.Contact.RegisterContact
 {
     public interface IRegisterContactRepository
     {
-        Task<ResponseModel> RegisterContact(ContactModel contacto);
+        Task<int> RegisterContact(ContactModel contacto);
 
     }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Scharff.Infrastructure.Queries.Contact.GetContactById
 {
-    public interface IGetContactById
+    public interface IGetContactByIdQuery
     {
-        Task<ContactModel> GetContactByID(int idClient);
+        Task<List<ContactModel>> GetContactById(int idClient);
 
     }
 }

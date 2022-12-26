@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Scharff.Application.Queries.Direction.GetDirectionById
 {
-    public class GetDirectionByIdQuery : IRequest<DirectionModel>
+    public class GetDirectionByIdQuery : IRequest<List<DirectionModel>>
     {
         public int Id { get; set; }
 

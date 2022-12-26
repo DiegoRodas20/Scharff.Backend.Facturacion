@@ -10,25 +10,32 @@ using System.Threading.Tasks;
 
 namespace Scharff.Infrastructure.Queries.Contact.GetContactById
 {
-    public class GetContactById : IGetContactById
+    public class GetContactByIdQuery : IGetContactByIdQuery
     {
         private readonly IDbConnection _connection;
 
-        public GetContactById(IDbConnection connection)
+        public GetContactByIdQuery(IDbConnection connection)
         {
             _connection = connection;
         }
-        public async Task<ContactModel> GetContactByID(int idClient)
+        public async Task<List<ContactModel>> GetContactById(int idClient)
         {
             using (IDbConnection connection = new NpgsqlConnection(_connection.ConnectionString))
             {
                 try
                 {
-                    string sql = @"SELECT * FROM CONTACTO WHERE id = @IdClient";
+                    string sql = @"SELECT 
+                                        * 
+                                   FROM 
+                                      CONTACTO 
+                                   WHERE 
+                                      ""idCliente"" = @idClient";
 
-                    ContactModel contact = await connection.QuerySingleAsync<ContactModel>(sql, idClient);
+                    var queryArgs = new { idClient };
 
-                    return contact;
+                    IEnumerable<ContactModel> contact = await connection.QueryAsync<ContactModel>(sql, queryArgs);
+
+                    return contact.ToList();
                 }
                 catch (NpgsqlException err)
                 {

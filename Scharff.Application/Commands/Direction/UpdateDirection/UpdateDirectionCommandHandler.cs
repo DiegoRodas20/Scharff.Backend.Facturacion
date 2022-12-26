@@ -22,7 +22,7 @@ namespace Scharff.Application.Commands.Direction.UpdateDirection
         {
             DirectionModel model = new()
             {
-                Id = request.Id,
+                id = request.Id,
                 Status = request.Status,
                 TypeDirectionParameter = request.TypeDirectionParameter,
                 IdClient = request.IdClient,

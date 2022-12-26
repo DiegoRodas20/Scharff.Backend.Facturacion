@@ -23,19 +23,19 @@ namespace Scharff.Application.Commands.Contact.UpdateContact
         {
             ContactModel model = new()
             {
-                Id=request.Id,
-                Status = request.Status,
-                IdClient = request.IdClient,
-                TypeContactParameter = request.TypeContactParameter,
-                AreaContactParameter = request.AreaContactParameter,
-                FullName = request.FullName,
-                Commentary = request.Commentary,
-                CreationDate = request.CreationDate,
-                AuthorCreation = request.AuthorCreation,
-                DateUpdate = request.DateUpdate,
-                AuthorUpdate = request.AuthorUpdate,
-                StartDate = request.StartDate,
-                EndDate = request.EndDate
+                id=request.Id,
+                estado = request.Status,
+                idCliente = request.IdClient,
+                tipoContacto_parametro = request.TypeContactParameter,
+                areaContacto_parametro = request.AreaContactParameter,
+                nombreCompleto = request.FullName,
+                comentario = request.Commentary,
+                fechaCreacion = request.CreationDate,
+                autorCreacion = request.AuthorCreation,
+                fechaActualizacion = request.DateUpdate,
+                autorActualizacion = request.AuthorUpdate,
+                fechaInicio = request.StartDate,
+                fechaFin = request.EndDate
 
             };
 

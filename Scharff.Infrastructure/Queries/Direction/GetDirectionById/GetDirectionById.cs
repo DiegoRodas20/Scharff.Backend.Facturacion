@@ -19,7 +19,7 @@ namespace Scharff.Infrastructure.Queries.Direction.GetDirectionById
         {
             _connection = connection;
         }
-        public async Task<DirectionModel> GetDirectionByID(int id)
+        public async Task<List<DirectionModel>> GetDirectionByID(int id)
         {
             using (IDbConnection connection = new NpgsqlConnection(_connection.ConnectionString))
             {
@@ -27,8 +27,8 @@ namespace Scharff.Infrastructure.Queries.Direction.GetDirectionById
                 {
                     string sql = @"SELECT * FROM DIRECCION WHERE id = @id";
 
-                    DirectionModel direction = await connection.QuerySingleAsync<DirectionModel>(sql, id);
-                    return direction;
+                    IEnumerable <DirectionModel> direction = await connection.QueryAsync<DirectionModel>(sql, id);
+                    return direction.ToList();
                 }
                 catch (NpgsqlException err)
                 {

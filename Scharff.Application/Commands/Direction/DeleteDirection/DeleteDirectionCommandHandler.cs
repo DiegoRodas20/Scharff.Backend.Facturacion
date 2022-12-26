@@ -22,10 +22,10 @@ namespace Scharff.Application.Commands.Direction.DeleteDirection
         {
             ContactModel model = new()
             {
-                Id = request.Id
+                id = request.Id
             };
 
-            var result = await _deleteDirectionRepository.DeleteDirection(model.Id);
+            var result = await _deleteDirectionRepository.DeleteDirection(model.id);
             return result;
         }
     }

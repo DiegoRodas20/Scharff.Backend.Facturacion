@@ -21,8 +21,7 @@ namespace Scharff.Infrastructure.Repositories.Contact.RegisterContact
             _connection = connection;
         }
 
-
-        public async Task<ResponseModel> RegisterContact(ContactModel contacto)
+        public async Task<int> RegisterContact(ContactModel contacto)
         {
 
             using (TransactionScope trans = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
@@ -31,38 +30,24 @@ namespace Scharff.Infrastructure.Repositories.Contact.RegisterContact
                 try
                 {
 
-        string insert = @"  INSERT INTO CONTACTO 
-                                            estado, 
-                                            idCliente,
-                                            tipoContacto_parametro,
-                                            areaContacto_parametro,
-                                            nombreCompleto,
-                                            comentario,
-                                            fechaCreacion,
-                                            autorCreacion,
-                                            fechaActualizacion,
-                                            autorActualizacion
-                                            fechaInicio
-                                            fechaFin
+                    string insert = @"  INSERT INTO CONTACTO 
+                                           (""estado"", 
+                                            ""idCliente"",
+                                            ""tipoContacto_parametro"",
+                                            ""areaContacto_parametro"",
+                                            ""nombreCompleto"",
+                                            ""comentario"")
                                         VALUES 
-                                            @Status, 
-                                            @IdClient, 
-                                            @TypeContactParameter, 
-                                            @AreaContactParameter, 
-                                            @FullName, 
-                                            @Commentary, 
-                                            @CreationDate, 
-                                            @AuthorCreation,
-                                            @DateUpdate,                                            
-                                            @AuthorUpdate,
-                                            @StartDate,
-                                            @EndDate;";
+                                            (true, 
+                                            @idCliente, 
+                                            @tipoContacto_parametro, 
+                                            @areaContacto_parametro, 
+                                            @nombreCompleto, 
+                                            @comentario) RETURNING Id;";
 
-                    int hasInsert = await connection.ExecuteAsync(insert, contacto);
-                    if (hasInsert <= 0)
-                        Handlers.ExceptionClose(connection, "Ocurrió un error al insertar el contacto");
-
-                    return Handlers.CloseConnection(connection, trans, "Registro exitoso");
+                    int idInsert = await connection.ExecuteScalarAsync<int>(insert, contacto);
+                    trans.Complete();
+                    return idInsert;
                 }
                 catch (NpgsqlException err)
                 {

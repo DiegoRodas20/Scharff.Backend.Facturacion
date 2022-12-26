@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 
 namespace Scharff.Application.Queries.Contact.GetContactoById
 {
-    public class GetContactByIdHandler : IRequestHandler<GetContactByIdQuery, ContactModel>
+    public class GetContactByIdHandler : IRequestHandler<GetContactByIdQuery, List<ContactModel>>
     {
-        private readonly IGetContactById _getContactByIdQuery;
+        private readonly IGetContactByIdQuery _getContactByIdQuery;
 
-        public GetContactByIdHandler(IGetContactById getContactByIdQuery)
+        public GetContactByIdHandler(IGetContactByIdQuery getContactByIdQuery)
         {
             _getContactByIdQuery = getContactByIdQuery;
         }
-        public async Task<ContactModel> Handle(GetContactByIdQuery request, CancellationToken cancellationToken)
+        public async Task<List<ContactModel>> Handle(GetContactByIdQuery request, CancellationToken cancellationToken)
         {
-            var result = await _getContactByIdQuery.GetContactByID(request.IdClient);
+            var result = await _getContactByIdQuery.GetContactById(request.IdClient);
             return result;
         }
     }

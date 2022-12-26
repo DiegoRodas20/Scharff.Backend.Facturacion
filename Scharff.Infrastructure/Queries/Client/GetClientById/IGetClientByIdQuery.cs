@@ -2,8 +2,8 @@
 
 namespace Scharff.Infrastructure.Queries.Client.GetClientById
 {
-    public interface IGetClientById
+    public interface IGetClientByIdQuery
     {
-        Task<ClientModel> GetClientByID(int idClient);
+        Task<ClientModel> GetClientById(int idClient);
     }
 }

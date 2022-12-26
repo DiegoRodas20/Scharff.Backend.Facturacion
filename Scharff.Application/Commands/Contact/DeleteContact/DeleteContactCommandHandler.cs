@@ -22,10 +22,10 @@ namespace Scharff.Application.Commands.Contact.DeleteContact
         {
             ContactModel model = new()
             {
-                Id = request.Id
+                id = request.Id
             };
 
-            var result = await _deleteContactRepository.DeleteContact(model.Id);
+            var result = await _deleteContactRepository.DeleteContact(model.id);
             return result;
         }
     }

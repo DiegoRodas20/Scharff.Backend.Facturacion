@@ -27,6 +27,7 @@ namespace Scharff.API.Controllers
         [SwaggerResponse(204, "No se encontraron clientes")]
         [SwaggerResponse(400, "Ocurrio un error de validacion")]
         public async Task<IActionResult> GetAllClients()
+
         {
             var result = await _mediator.Send(new GetAllClientsQuery());
 
@@ -53,18 +54,7 @@ namespace Scharff.API.Controllers
             GetClientByIdQuery request = new() { IdClient = idClient };
 
             var result = await _mediator.Send(request);
-
-            if (result == null)
-            {
-                throw new Exception("No se encontro un cliente con el id indicado.");
-            }
-            else
-            {
-                return Ok(new CustomResponse<ClientModel>(
-                        $"Se encontraron el cliente con id:{result.id}.",
-                        result
-                        ));
-            }
+            return Ok(new CustomResponse<ClientModel>($"Se encontro el cliente con id: {idClient}.", result));
         }
 
         [HttpPost]
@@ -72,21 +62,18 @@ namespace Scharff.API.Controllers
         public async Task<IActionResult> RegisterClient([FromBody] RegisterClientCommand request)
         {
             var result = await _mediator.Send(request);
-            return Ok(new CustomResponse<int>(
-                        $"Se inserto el cliente con id: {result}.",
-                        result
-                        ));
+            return Ok(new CustomResponse<int>($"Se inserto el cliente con id: {result}.", result));
         }
 
 
-        //[HttpPut(template: "{idClient}")]
-        //[SwaggerOperation("Actualizar Cliente")]
-        //public async Task<IActionResult> UpdateClient(int idClient, [FromBody] UpdateClientCommand request)
-        //{
-        //    request.id = idClient;
-        //    var result = await _mediator.Send(request);
-        //    return Ok(result);
-        //}
+        [HttpPut(template: "{idClient}")]
+        [SwaggerOperation("Actualizar Cliente")]
+        public async Task<IActionResult> UpdateClient(int idClient, [FromBody] UpdateClientCommand request)
+        {
+            request.id = idClient;
+            var result = await _mediator.Send(request);
+            return Ok(new CustomResponse<int>($"Se actualizo el cliente con id: {idClient}.", result));
+        }
 
 
         //[HttpPut(template: "{idClient}")]

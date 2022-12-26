@@ -38,7 +38,8 @@ namespace Scharff.Infrastructure.Repositories.Client.RegisterClient
                                             ""grupoEmpresarial_parametro"",
                                             ""codigoSector_parametro"",
                                             ""holding_parametro"",
-                                            ""codigoSegmentacion_parametro"")
+                                            ""codigoSegmentacion_parametro"",
+                                            ""comentario"")
                                         VALUES 
                                             (@tipoDocumentoIdentidad, 
                                             @numeroDocumentoIdentidad, 
@@ -49,10 +50,11 @@ namespace Scharff.Infrastructure.Repositories.Client.RegisterClient
                                             @grupoEmpresarial_parametro, 
                                             @codigoSector_parametro,
                                             @holding_parametro,                                            
-                                            @codigoSegmentacion_parametro) RETURNING Id;";
+                                            @codigoSegmentacion_parametro,
+                                            @comentario) RETURNING Id;";
 
                     int idInsert = await connection.ExecuteScalarAsync<int>(insert, cliente);
-
+                    trans.Complete();
                     return idInsert;
                 }
                 catch (NpgsqlException err)

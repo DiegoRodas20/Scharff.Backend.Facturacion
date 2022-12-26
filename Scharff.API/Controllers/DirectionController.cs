@@ -23,28 +23,28 @@ namespace Scharff.API.Controllers
         {
             _mediator = mediator;
         }
-        [HttpGet(template: "{id}")]
-        [SwaggerResponse(200, "Retorna un contacto en base a su ID", typeof(DirectionModel))]
-        [SwaggerResponse(204, "No se encontro el contacto")]
-        [SwaggerResponse(400, "Ocurrio un error de validacion")]
-        public async Task<IActionResult> GetDirectionByID(int id)
-        {
-            GetDirectionByIdQuery request = new() { Id = id };
+        //[HttpGet(template: "{id}")]
+        //[SwaggerResponse(200, "Retorna un contacto en base a su ID", typeof(DirectionModel))]
+        //[SwaggerResponse(204, "No se encontro el contacto")]
+        //[SwaggerResponse(400, "Ocurrio un error de validacion")]
+        //public async Task<IActionResult> GetDirectionByID(int id)
+        //{
+        //    GetDirectionByIdQuery request = new() { Id = id };
 
-            var result = await _mediator.Send(request);
+        //    var result = await _mediator.Send(request);
 
-            if (result == null)
-            {
-                throw new Exception($"No se encontraro la direccion con el id {id}.");
-            }
-            else
-            {
-                return Ok(new CustomResponse<DirectionModel>(
-                        $"Se encontro la direccion con id:{result.Id}.",
-                        result
-                        ));
-            }
-        }
+        //    if (result == null)
+        //    {
+        //        throw new Exception($"No se encontraro la direccion con el id {id}.");
+        //    }
+        //    else
+        //    {
+        //        return Ok(new CustomResponse<DirectionModel>(
+        //                $"Se encontro la direccion con id:{result.Id}.",
+        //                result
+        //                ));
+        //    }
+        //}
         [HttpPost]
         [SwaggerOperation("Registrar direccion")]
         public async Task<IActionResult> RegisterDirection([FromBody] RegisterDirectionCommand request)

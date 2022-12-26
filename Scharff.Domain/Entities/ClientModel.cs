@@ -1,7 +1,4 @@
-﻿using System.Net.Sockets;
-using System.Numerics;
-
-namespace Scharff.Domain.Entities
+﻿namespace Scharff.Domain.Entities
 {
     public class ClientModel
     {
@@ -30,6 +27,14 @@ namespace Scharff.Domain.Entities
         public int autorCreacion { get; set; }
         public DateTime fechaModificacion { get; set; }
         public int autorModificacion { get; set; }
+
+        //Descripciones tabla Parametro
+        public string? descripcionGrupoEmpresarial { get; set; }
+        public string? descripcionCodigoSector { get; set; }
+        public string? descripcionTipoMoneda { get; set; }
+        public string? descripcionTipoDocumentoIdentidad { get; set; }
+        public string? descripcionHolding { get; set; }
+        public string? descripcionCodigoSegmentacion { get; set; }
 
     }
 }

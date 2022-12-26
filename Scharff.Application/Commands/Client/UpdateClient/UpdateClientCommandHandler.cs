@@ -1,33 +1,36 @@
 ﻿using MediatR;
+using Scharff.Application.Commands.Client.RegisterClient;
 using Scharff.Domain.Entities;
 using Scharff.Infrastructure.Queries.Client.GetAllClients;
 using Scharff.Infrastructure.Repositories.Client.RegisterClient;
-using Scharff.Domain.Utils.Exceptions;
+using Scharff.Infrastructure.Repositories.Client.UpdateClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Scharff.Application.Commands.Client.RegisterClient
+namespace Scharff.Application.Commands.Client.UpdateClient
 {
-    public class RegisterClientCommandHandler : IRequestHandler<RegisterClientCommand, int>
+    public class UpdateClientCommandHandler : IRequestHandler<UpdateClientCommand, int>
     {
-        private readonly IRegisterClientRepository _registerClientRepository;
+
+        private readonly IUpdateClientRepository _updateClientRepository;
         private readonly IGetAllClients _getAllClients;
-        public RegisterClientCommandHandler(
-            IRegisterClientRepository registerClientRepository,
+        public UpdateClientCommandHandler(
+            IUpdateClientRepository updateClientRepository,
             IGetAllClients getAllClients
             )
         {
-            _registerClientRepository = registerClientRepository;
+            _updateClientRepository = updateClientRepository;
             _getAllClients = getAllClients;
         }
 
-        public async Task<int> Handle(RegisterClientCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(UpdateClientCommand request, CancellationToken cancellationToken)
         {
             ClientModel model = new()
             {
+                id = request.id,
                 tipoDocumentoIdentidad = request.tipoDocumentoIdentidad,
                 numeroDocumentoIdentidad = request.numeroDocumentoIdentidad,
                 razonSocial = request.razonSocial,
@@ -41,14 +44,9 @@ namespace Scharff.Application.Commands.Client.RegisterClient
                 comentario = request.comentario
             };
 
-            //Validacion del documento de identidad
-            var clientes = await _getAllClients.GetAllClient();
-            if (clientes.Any(cliente => cliente.numeroDocumentoIdentidad == model.numeroDocumentoIdentidad)) throw new ValidationException("El numero de documento indicado ya esta registrado");
-            //var client = await _getAllClientByNumDoc(model.numeroDocumentoIdentidad);
-            //if(client != null) throw new ValidationException("El numero de documento indicado ya esta registrado");
-
-            var result = await _registerClientRepository.RegisterClient(model);
+            var result = await _updateClientRepository.UpdateClient(model);
             return result;
         }
     }
 }
+

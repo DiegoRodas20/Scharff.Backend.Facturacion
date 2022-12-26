@@ -9,7 +9,7 @@ namespace Scharff.Infrastructure.Repositories.Direction.RegisterDirection
 {
     public  interface IRegisterDirectionRepository
     {
-        Task<ResponseModel> RegisterDirection(DirectionModel direction);
+        Task<int> RegisterDirection(DirectionModel direction);
 
     }
 }
