@@ -32,15 +32,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IDbConnection>(x => new NpgsqlConnection(builder.Configuration.GetConnectionString("Scharff_BD")));
-var port = Environment.GetEnvironmentVariable("PORT");
-if(port != null)
-{
-    builder.WebHost.UseUrls($"https://0.0.0.0:{port})");
-}
-else
-{
-    builder.WebHost.UseUrls($"https://localhost:7170");
-}
 
 builder.Services.AddCors(options =>
     {
