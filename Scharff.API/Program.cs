@@ -35,7 +35,7 @@ builder.Services.AddTransient<IDbConnection>(x => new NpgsqlConnection(builder.C
 var port = Environment.GetEnvironmentVariable("PORT");
 if(port != null)
 {
-    builder.WebHost.UseUrls($"http://localhost:{port})");
+    builder.WebHost.UseUrls($"https://0.0.0.0:{port})");
 }
 else
 {
