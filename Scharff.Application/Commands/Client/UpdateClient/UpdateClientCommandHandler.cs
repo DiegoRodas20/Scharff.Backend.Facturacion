@@ -1,14 +1,7 @@
 ﻿using MediatR;
-using Scharff.Application.Commands.Client.RegisterClient;
 using Scharff.Domain.Entities;
 using Scharff.Infrastructure.Queries.Client.GetAllClients;
-using Scharff.Infrastructure.Repositories.Client.RegisterClient;
 using Scharff.Infrastructure.Repositories.Client.UpdateClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Scharff.Application.Commands.Client.UpdateClient
 {

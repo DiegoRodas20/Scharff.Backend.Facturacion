@@ -3,17 +3,17 @@ using Npgsql;
 using System.Data;
 using System.Transactions;
 
-namespace Scharff.Infrastructure.Repositories.Contact.DeleteContact
+namespace Scharff.Infrastructure.Repositories.Contact.DeleteEmailContact
 {
-    public class DeleteContactRepository : IDeleteContactRepository
+    public class DeleteEmailContactRepository : IDeleteEmailContactRepository
     {
         private readonly IDbConnection _connection;
 
-        public DeleteContactRepository(IDbConnection connection)
+        public DeleteEmailContactRepository(IDbConnection connection)
         {
             _connection = connection;
         }
-        public async Task<int> DeleteContact(int Id)
+        public async Task<int> DeleteEmailContact(int IdContacto)
         {
             using (TransactionScope trans = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             using (IDbConnection connection = new NpgsqlConnection(_connection.ConnectionString))
@@ -21,13 +21,16 @@ namespace Scharff.Infrastructure.Repositories.Contact.DeleteContact
                 try
                 {
 
-                    string delete = @"  DELETE  
-                                        FROM public.contacto
-                                        WHERE 
-                                        id= @Id ;";
 
-                    var queryArgs = new { Id };
 
+                    string delete = @" DELETE  
+                                       FROM public.email_contacto
+                                       WHERE 
+                                       ""idContacto""= @IdContacto ;"
+                    ;
+
+
+                    var queryArgs = new { IdContacto };
 
                     int hasDelete = await connection.ExecuteAsync(delete, queryArgs);
                     trans.Complete();
@@ -39,7 +42,6 @@ namespace Scharff.Infrastructure.Repositories.Contact.DeleteContact
                     throw err;
                 }
             }
-
         }
     }
 }

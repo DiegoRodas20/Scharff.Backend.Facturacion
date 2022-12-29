@@ -11,21 +11,21 @@ using System.Threading.Tasks;
 
 namespace Scharff.Application.Commands.Direction.DeleteDirection
 {
-    public class DeleteDirectionCommandHandler : IRequestHandler<DeleteContactCommand, ResponseModel>
+    public class DeleteDirectionCommandHandler : IRequestHandler<DeleteDirectionCommand, ResponseModel>
     {
         private readonly IDeleteDirectionRepository _deleteDirectionRepository;
         public DeleteDirectionCommandHandler(IDeleteDirectionRepository deleteDirectionRepository)
         {
             _deleteDirectionRepository = deleteDirectionRepository;
         }
-        public async Task<ResponseModel> Handle(DeleteContactCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(DeleteDirectionCommand request, CancellationToken cancellationToken)
         {
             ContactModel model = new()
             {
-                id = request.Id
+                Id = request.Id
             };
 
-            var result = await _deleteDirectionRepository.DeleteDirection(model.id);
+            var result = await _deleteDirectionRepository.DeleteDirection(model.Id);
             return result;
         }
     }

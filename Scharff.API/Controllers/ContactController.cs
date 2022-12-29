@@ -1,12 +1,10 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Scharff.API.Utils.Models;
-using Scharff.Application.Commands.Client.RegisterClient;
 using Scharff.Application.Commands.Contact.DeleteContact;
 using Scharff.Application.Commands.Contact.RegisterContact;
 using Scharff.Application.Commands.Contact.UpdateContact;
-using Scharff.Application.Queries.Client.GetClientById;
+using Scharff.Application.Queries.Contact.GetContactById;
 using Scharff.Application.Queries.Contact.GetContactoById;
 using Scharff.Domain.Entities;
 using Swashbuckle.AspNetCore.Annotations;
@@ -22,16 +20,28 @@ namespace Scharff.API.Controllers
         {
             _mediator = mediator;
         }
-        [HttpGet(template: "{idClient}")]
+        [HttpGet(template: "GetList/{idClient}")]
         [SwaggerResponse(200, "Retorna un contacto en base a su ID", typeof(ContactModel))]
         [SwaggerResponse(204, "No se encontro el contacto")]
         [SwaggerResponse(400, "Ocurrio un error de validacion")]
         public async Task<IActionResult> GetContactsByIdClient(int idClient)
         {
-            GetContactByIdQuery request = new() { IdClient = idClient };
+            GetContactByIdClientQuery request = new() { IdClient = idClient };
 
             var result = await _mediator.Send(request);
             return Ok(new CustomResponse<List<ContactModel>>($"Se encontraron los contactos con el id cliente: {idClient}.", result));
+        }
+
+        [HttpGet(template: "{id}")]
+        [SwaggerResponse(200, "Retorna un contacto en base a su ID", typeof(ContactModel))]
+        [SwaggerResponse(204, "No se encontro el contacto")]
+        [SwaggerResponse(400, "Ocurrio un error de validacion")]
+        public async Task<IActionResult> GetContactsById(int id)
+        {
+            GetContactByIdQuery request = new() { Id = id };
+
+            var result = await _mediator.Send(request);
+            return Ok(new CustomResponse<ContactModel>($"Se encontro el contacto: {id}.", result));
         }
 
         [HttpPost]
@@ -48,16 +58,15 @@ namespace Scharff.API.Controllers
         {
             request.Id = id;
             var result = await _mediator.Send(request);
-            return Ok(result);
+            return Ok(new CustomResponse<int>($"Se actualizo el contacto con id: {result}.", result));
         }
 
         [HttpDelete(template: "{id}")]
         [SwaggerOperation("Eliminar Contacto")]
-        public async Task<IActionResult> DeleteContact(int id, [FromBody] DeleteContactCommand request)
+        public async Task<IActionResult> DeleteContact(int id)
         {
-            request.Id = id;
-            var result = await _mediator.Send(request);
-            return Ok(result);
+            var result = await _mediator.Send(new DeleteContactCommand() { Id = id });
+            return Ok(new CustomResponse<int>($"Se elimino el contacto con id: {result}.", result));
         }
     }
 }

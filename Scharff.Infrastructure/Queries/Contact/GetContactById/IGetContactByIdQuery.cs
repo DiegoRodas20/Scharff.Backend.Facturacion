@@ -1,15 +1,12 @@
 ﻿using Scharff.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static Scharff.Domain.Entities.ContactModel;
 
 namespace Scharff.Infrastructure.Queries.Contact.GetContactById
 {
     public interface IGetContactByIdQuery
     {
-        Task<List<ContactModel>> GetContactById(int idClient);
-
+        Task<ContactModel> GetContactById(int id);
+        Task<List<GetPhoneContactModelDTO>> GetPhonesById(int Id);
+        Task<List<GetEmailContactModelDTO>> GetEmailsById(int Id);
     }
 }

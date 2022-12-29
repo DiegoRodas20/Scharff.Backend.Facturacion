@@ -1,32 +1,41 @@
 ﻿using MediatR;
-using Scharff.Application.Commands.Contact.UpdateContact;
 using Scharff.Domain.Entities;
 using Scharff.Infrastructure.Repositories.Contact.DeleteContact;
-using Scharff.Infrastructure.Repositories.Contact.UpdateContact;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Scharff.Infrastructure.Repositories.Contact.DeleteEmailContact;
+using Scharff.Infrastructure.Repositories.Contact.DeletePhoneContact;
+using System.ComponentModel.DataAnnotations;
 
 namespace Scharff.Application.Commands.Contact.DeleteContact
 {
-    public class DeleteContactCommandHandler : IRequestHandler<DeleteContactCommand, ResponseModel>
+    public class DeleteContactCommandHandler : IRequestHandler<DeleteContactCommand, int>
     {
         private readonly IDeleteContactRepository _deleteContactRepository;
-        public DeleteContactCommandHandler(IDeleteContactRepository deleteContactRepository)
+        private readonly IDeletePhoneContactRepository _deletePhoneContactRepository;
+        private readonly IDeleteEmailContactRepository _deleteEmailContactRepository;
+
+        public DeleteContactCommandHandler(IDeleteContactRepository deleteContactRepository, IDeletePhoneContactRepository deletePhoneContactRepository, IDeleteEmailContactRepository deleteEmailContactRepository)
         {
             _deleteContactRepository = deleteContactRepository;
+            _deletePhoneContactRepository = deletePhoneContactRepository;
+            _deleteEmailContactRepository = deleteEmailContactRepository;
         }
-        public async Task<ResponseModel> Handle(DeleteContactCommand request, CancellationToken cancellationToken)
+
+        public async Task<int> Handle(DeleteContactCommand request, CancellationToken cancellationToken)
         {
             ContactModel model = new()
             {
-                id = request.Id
+                Id = request.Id
             };
 
-            var result = await _deleteContactRepository.DeleteContact(model.id);
-            return result;
+            await _deletePhoneContactRepository.DeletePhoneContact(model.Id);
+
+            await _deleteEmailContactRepository.DeleteEmailContact(model.Id);
+
+            var resultContact = await _deleteContactRepository.DeleteContact(model.Id);
+
+            if (resultContact <= 0) throw new ValidationException("No se encontro el id a eliminar");
+
+            return model.Id;
         }
     }
 }
