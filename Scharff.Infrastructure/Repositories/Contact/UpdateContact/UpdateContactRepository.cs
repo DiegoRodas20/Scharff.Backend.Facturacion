@@ -1,13 +1,7 @@
 ﻿using Dapper;
-using JKM.UTILITY.Utils;
 using Npgsql;
 using Scharff.Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace Scharff.Infrastructure.Repositories.Contact.UpdateContact
@@ -21,35 +15,27 @@ namespace Scharff.Infrastructure.Repositories.Contact.UpdateContact
             _connection = connection;
         }
 
-        public async Task<ResponseModel> UpdateContact(ContactModel contacto)
+        public async Task<int> UpdateContact(ContactModel contacto)
         {
             using (TransactionScope trans = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             using (IDbConnection connection = new NpgsqlConnection(_connection.ConnectionString))
             {
                 try
                 {
-
-        string update = @"  UPDATE CONTACTO 
-                                        SET estado = Status, 
-                                            idCliente = @IdClient,
-                                            tipoContacto_parametro = @TypeContactParameter,
-                                            areaContacto_parametro = @AreaContactParameter,
-                                            nombreCompleto = @FullName,
-                                            comentario = @Commentary,
-                                            fechaCreacion = @CreationDate ,
-                                            autorCreacion = @AuthorCreation,
-                                            fechaActualizacion = @DateUpdate,
-                                            autorActualizacion = @AuthorUpdate
-                                            fechaInicio = @StartDate
-                                            fechaFin = @EndDate
+                    string update = @"  UPDATE public.contacto 
+                                        SET                                             
+                                            ""tipoContacto_parametro"" = @tipoContacto_parametro,
+                                            ""areaContacto_parametro"" = @areaContacto_parametro,
+                                            ""nombreCompleto"" = @nombreCompleto,
+                                            ""comentario"" = @comentario,
+                                            ""fechaActualizacion"" = @fechaActualizacion
                                         WHERE 
                                             Id= @Id ;";
 
                     int hasUpdate = await connection.ExecuteAsync(update, contacto);
-                    if (hasUpdate <= 0)
-                        Handlers.ExceptionClose(connection, "Ocurrió un error al actualizar el contacto");
+                    trans.Complete();
+                    return hasUpdate;
 
-                    return Handlers.CloseConnection(connection, trans, "Actualizar exitoso");
                 }
                 catch (NpgsqlException err)
                 {
@@ -59,5 +45,5 @@ namespace Scharff.Infrastructure.Repositories.Contact.UpdateContact
 
         }
     }
-    
+
 }

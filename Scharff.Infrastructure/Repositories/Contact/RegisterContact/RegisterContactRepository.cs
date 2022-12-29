@@ -1,13 +1,7 @@
 ﻿using Dapper;
-using JKM.UTILITY.Utils;
 using Npgsql;
 using Scharff.Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace Scharff.Infrastructure.Repositories.Contact.RegisterContact
@@ -30,20 +24,29 @@ namespace Scharff.Infrastructure.Repositories.Contact.RegisterContact
                 try
                 {
 
-                    string insert = @"  INSERT INTO CONTACTO 
+
+
+                    string insert = @"  INSERT INTO public.contacto 
                                            (""estado"", 
                                             ""idCliente"",
                                             ""tipoContacto_parametro"",
                                             ""areaContacto_parametro"",
                                             ""nombreCompleto"",
-                                            ""comentario"")
+                                            ""comentario"",
+                                            ""fechaCreacion"",
+                                            ""fechaInicio""
+                                            )
                                         VALUES 
-                                            (true, 
+                                            (@estado, 
                                             @idCliente, 
                                             @tipoContacto_parametro, 
                                             @areaContacto_parametro, 
                                             @nombreCompleto, 
-                                            @comentario) RETURNING Id;";
+                                            @comentario,
+                                            @fechaCreacion,
+                                            @fechaInicio
+                                            ) 
+                                            RETURNING Id;";
 
                     int idInsert = await connection.ExecuteScalarAsync<int>(insert, contacto);
                     trans.Complete();

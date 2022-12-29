@@ -1,13 +1,8 @@
 ﻿using MediatR;
 using Scharff.Domain.Entities;
+using Scharff.Domain.Utils.Exceptions;
 using Scharff.Infrastructure.Queries.Client.GetAllClients;
 using Scharff.Infrastructure.Repositories.Client.RegisterClient;
-using Scharff.Domain.Utils.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Scharff.Application.Commands.Client.RegisterClient
 {

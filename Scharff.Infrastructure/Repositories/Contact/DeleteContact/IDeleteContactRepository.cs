@@ -1,15 +1,8 @@
-﻿using Scharff.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Scharff.Infrastructure.Repositories.Contact.DeleteContact
+﻿namespace Scharff.Infrastructure.Repositories.Contact.DeleteContact
 {
     public interface IDeleteContactRepository
     {
-        Task<ResponseModel> DeleteContact( int Id);
+        Task<int> DeleteContact(int Id);
 
     }
 }
