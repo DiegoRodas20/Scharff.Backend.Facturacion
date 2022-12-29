@@ -33,18 +33,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IDbConnection>(x => new NpgsqlConnection(builder.Configuration.GetConnectionString("Scharff_BD")));
 
-builder.WebHost.ConfigureKestrel(serverOptions =>
-{
-
-    var portVar = Environment.GetEnvironmentVariable("PORT");
-    if(portVar == null) portVar = "3000";
-
-    serverOptions.ConfigureHttpsDefaults(listenOptions =>
-    {
-        serverOptions.ListenAnyIP(int.Parse(portVar));
-    });
-
-});
+var port = builder.Configuration["PORT"];
+builder.WebHost.UseUrls($"http://0.0.0.0:{port};https://localhost:7170");
 
 builder.Services.AddCors(options =>
     {
