@@ -1,14 +1,7 @@
 ﻿using Dapper;
-using Microsoft.VisualBasic;
 using Npgsql;
 using Scharff.Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace Scharff.Infrastructure.Repositories.Client.UpdateClient

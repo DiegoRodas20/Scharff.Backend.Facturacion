@@ -5,6 +5,8 @@ using Scharff.Infrastructure.Queries.Client.GetAllClients;
 using Scharff.Infrastructure.Queries.Client.GetClientById;
 using Scharff.Infrastructure.Queries.Contact.GetContactById;
 using Scharff.Infrastructure.Queries.Direction.GetDirectionById;
+using Scharff.Infrastructure.Queries.Utils.VerifyIdentityClient;
+using Scharff.Infrastructure.Repositories.Client.DisableClient;
 using Scharff.Infrastructure.Repositories.Client.RegisterClient;
 using Scharff.Infrastructure.Repositories.Client.UpdateClient;
 using Scharff.Infrastructure.Repositories.Contact.DeleteContact;
@@ -42,6 +44,7 @@ builder.Services.AddTransient(typeof(IGetClientByIdQuery), typeof(GetClientByIdQ
 builder.Services.AddTransient(typeof(IRegisterClientRepository), typeof(RegisterClientRepository));
 builder.Services.AddTransient(typeof(IUpdateClientRepository), typeof(UpdateClientRepository));
 builder.Services.AddTransient(typeof(IGetAllClients), typeof(GetAllClients));
+builder.Services.AddTransient(typeof(IDisableClientRepository), typeof(DisableClientRepository));
 
 builder.Services.AddTransient(typeof(IGetContactByIdClientQuery), typeof(GetContactByIdClientQuery));
 builder.Services.AddTransient(typeof(IGetContactByIdQuery), typeof(GetContactByIdQuery));
@@ -66,6 +69,8 @@ builder.Services.AddTransient(typeof(IRegisterDirectionRepository), typeof(Regis
 
 builder.Services.AddTransient(typeof(IUpdateDirectionRepository), typeof(UpdateDirectionRepository));
 builder.Services.AddTransient(typeof(IDeleteDirectionRepository), typeof(DeleteDirectionRepository));
+
+builder.Services.AddTransient(typeof(IVerifyIdentityClientQuery), typeof(VerifyIdentityClientQuery));
 
 
 Assembly application = AppDomain.CurrentDomain.Load("Scharff.Application");
