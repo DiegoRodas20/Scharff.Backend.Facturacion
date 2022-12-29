@@ -35,9 +35,6 @@ namespace Scharff.API.Controllers
             return Ok(new CustomResponse<List<DirectionModel>>($"Se encontraron las direcciones con el id cliente: {idClient}.", result));
         }
 
-       
-
-
         [HttpPost]        
         [SwaggerOperation("Registrar direccion")]
         public async Task<IActionResult> RegisterDirection([FromBody] RegisterAddressCommand request)
