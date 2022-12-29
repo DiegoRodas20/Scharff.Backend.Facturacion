@@ -2,7 +2,7 @@
 
 namespace Scharff.Application.Commands.Direction.RegisterDirection
 {
-    public class RegisterDirectionCommand : IRequest<int>
+    public class RegisterAddressCommand : IRequest<int>
     {
         public int id { get; set; }
         public int idCliente { get; set; }

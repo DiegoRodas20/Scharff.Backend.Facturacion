@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Npgsql;
 using Scharff.API.Utils.GlobalHandlers;
+using Scharff.Infrastructure.Queries.Address.GetAddressByIdClient;
+
 using Scharff.Infrastructure.Queries.Client.GetAllClients;
 using Scharff.Infrastructure.Queries.Client.GetClientById;
 using Scharff.Infrastructure.Queries.Contact.GetContactById;
@@ -64,11 +66,13 @@ builder.Services.AddTransient(typeof(IDeletePhoneContactRepository), typeof(Dele
 builder.Services.AddTransient(typeof(IDeleteEmailContactRepository), typeof(DeleteEmailContactRepository));
 
 
-builder.Services.AddTransient(typeof(IGetDirectionById), typeof(GetDirectionById));
-builder.Services.AddTransient(typeof(IRegisterDirectionRepository), typeof(RegisterDirectionRepository));
+builder.Services.AddTransient(typeof(IGetAddressByIdClient), typeof(GetAddressByIdClient));
+builder.Services.AddTransient(typeof(IRegisterAddressRepository), typeof(RegisterAddressRepository));
+
+builder.Services.AddTransient(typeof(IGetAddressById), typeof(GetAddressById));
 
 builder.Services.AddTransient(typeof(IUpdateDirectionRepository), typeof(UpdateDirectionRepository));
-builder.Services.AddTransient(typeof(IDeleteDirectionRepository), typeof(DeleteDirectionRepository));
+builder.Services.AddTransient(typeof(IDeleteAddressRepository), typeof(DeleteAddressRepository));
 
 builder.Services.AddTransient(typeof(IVerifyIdentityClientQuery), typeof(VerifyIdentityClientQuery));
 

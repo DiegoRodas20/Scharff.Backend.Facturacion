@@ -9,7 +9,7 @@ namespace Scharff.Infrastructure.Repositories.Direction.UpdateDirection
 {
     public interface IUpdateDirectionRepository
     {
-        Task<ResponseModel> UpdateDirection(DirectionModel direction);
+        Task<ResponseModel> UpdateDirection(AddressModel direction);
 
     }
 }

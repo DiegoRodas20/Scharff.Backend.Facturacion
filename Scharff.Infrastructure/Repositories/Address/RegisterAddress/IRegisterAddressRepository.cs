@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Scharff.Infrastructure.Repositories.Direction.RegisterDirection
 {
-    public  interface IRegisterDirectionRepository
+    public  interface IRegisterAddressRepository
     {
-        Task<int> RegisterDirection(DirectionModel direction);
+        Task<int> RegisterAddress(AddressModel direction);
 
     }
 }

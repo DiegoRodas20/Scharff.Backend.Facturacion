@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Scharff.Application.Commands.Direction.UpdateDirection
 {
-    public class UpdateDirectionCommand :IRequest<ResponseModel>
+    public class UpdateAddressCommand :IRequest<ResponseModel>
     {
         public int Id { get; set; }
         public Boolean? Status { get; set; }

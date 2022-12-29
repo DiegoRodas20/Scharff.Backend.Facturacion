@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 
 namespace Scharff.Application.Queries.Direction.GetDirectionById
 {
-    public class GetDirectionByIdHandler : IRequestHandler<GetDirectionByIdQuery, List<DirectionModel>>
+    public class GetAddressByIdHandler : IRequestHandler<GetAddressByIdQuery, List<DirectionModel>>
     {
-        private readonly IGetDirectionById _getDirectionByIdQuery;
+        private readonly IGetAddressById _getDirectionByIdQuery;
 
-        public GetDirectionByIdHandler(IGetDirectionById getDirectionByIdQuery)
+        public GetAddressByIdHandler(IGetAddressById getDirectionByIdQuery)
         {
             _getDirectionByIdQuery = getDirectionByIdQuery;
         }
-        public async Task<List<DirectionModel>> Handle(GetDirectionByIdQuery request, CancellationToken cancellationToken)
+        public async Task<List<DirectionModel>> Handle(GetAddressByIdQuery request, CancellationToken cancellationToken)
         {
             var result = await _getDirectionByIdQuery.GetDirectionByID(request.Id);
             return result;

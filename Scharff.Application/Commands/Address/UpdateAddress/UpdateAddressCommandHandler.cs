@@ -11,18 +11,18 @@ using System.Threading.Tasks;
 
 namespace Scharff.Application.Commands.Direction.UpdateDirection
 {
-    public class UpdateDirectionCommandHandler : IRequestHandler<UpdateDirectionCommand, ResponseModel>
+    public class UpdateAddressCommandHandler : IRequestHandler<UpdateAddressCommand, ResponseModel>
     {
         private readonly IUpdateDirectionRepository _updateDirectionRepository;
-        public UpdateDirectionCommandHandler(IUpdateDirectionRepository updateDirectionRepository)
+        public UpdateAddressCommandHandler(IUpdateDirectionRepository updateDirectionRepository)
         {
             _updateDirectionRepository = updateDirectionRepository;
         }
-        public async Task<ResponseModel> Handle(UpdateDirectionCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseModel> Handle(UpdateAddressCommand request, CancellationToken cancellationToken)
         {
-            DirectionModel model = new()
+            AddressModel model = new()
             {
-                id = request.Id,
+                Id = request.Id,
                 Status = request.Status,
                 TypeDirectionParameter = request.TypeDirectionParameter,
                 IdClient = request.IdClient,

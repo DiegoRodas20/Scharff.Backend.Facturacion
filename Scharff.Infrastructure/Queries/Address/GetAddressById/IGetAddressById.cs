@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Scharff.Infrastructure.Queries.Direction.GetDirectionById
 {
-    public interface IGetDirectionById
+    public interface IGetAddressById
     {
         Task<List<DirectionModel>> GetDirectionByID(int id);
     }
