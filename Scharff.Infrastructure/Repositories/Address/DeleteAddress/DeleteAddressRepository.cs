@@ -12,15 +12,15 @@ using System.Transactions;
 
 namespace Scharff.Infrastructure.Repositories.Direction.DeleteDirection
 {
-    public class DeleteDirectionRepository : IDeleteDirectionRepository
+    public class DeleteAddressRepository : IDeleteAddressRepository
     {
         private readonly IDbConnection _connection;
 
-        public DeleteDirectionRepository(IDbConnection connection)
+        public DeleteAddressRepository(IDbConnection connection)
         {
             _connection = connection;
         }
-        public async Task<ResponseModel> DeleteDirection(int Id)
+        public async Task<ResponseModel> DeleteAddress(int Id)
         {
             using (TransactionScope trans = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             using (IDbConnection connection = new NpgsqlConnection(_connection.ConnectionString))
@@ -31,9 +31,9 @@ namespace Scharff.Infrastructure.Repositories.Direction.DeleteDirection
                     string delete = @"  DELETE  
                                         FROM DIRECCION
                                         WHERE 
-                                        Id= @Id ;";
-
-                    int hasDelete = await connection.ExecuteAsync(delete, Id);
+                                        ""id""= @Id ;";
+                    var queryArgs = new { Id };
+                    int hasDelete = await connection.ExecuteAsync(delete, queryArgs);
                     if (hasDelete <= 0)
                         Handlers.ExceptionClose(connection, "Ocurrió un error al eliminar la direccion");
 

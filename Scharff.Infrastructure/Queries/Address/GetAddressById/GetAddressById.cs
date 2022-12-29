@@ -1,21 +1,17 @@
 ﻿using Dapper;
 using Npgsql;
 using Scharff.Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Scharff.Infrastructure.Queries.Direction.GetDirectionById
 {
-    public class GetDirectionById : IGetDirectionById
+    public class GetAddressById : IGetAddressById
     {
         private readonly IDbConnection _connection;
 
-        public GetDirectionById(IDbConnection connection)
+        public GetAddressById(IDbConnection connection)
         {
             _connection = connection;
         }
@@ -25,9 +21,9 @@ namespace Scharff.Infrastructure.Queries.Direction.GetDirectionById
             {
                 try
                 {
-                    string sql = @"SELECT * FROM DIRECCION WHERE id = @id";
-
-                    IEnumerable <DirectionModel> direction = await connection.QueryAsync<DirectionModel>(sql, id);
+                    string sql = @"SELECT * FROM DIRECCION WHERE ""id"" = @id";
+                    var queryArgs = new { id };
+                    IEnumerable <DirectionModel> direction = await connection.QueryAsync<DirectionModel>(sql, queryArgs);
                     return direction.ToList();
                 }
                 catch (NpgsqlException err)

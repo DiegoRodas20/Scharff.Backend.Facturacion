@@ -13,15 +13,15 @@ using System.Transactions;
 
 namespace Scharff.Infrastructure.Repositories.Direction.RegisterDirection
 {
-    public   class RegisterDirectionRepository : IRegisterDirectionRepository
+    public   class RegisterAddressRepository : IRegisterAddressRepository
     {
         private readonly IDbConnection _connection;
 
-        public RegisterDirectionRepository(IDbConnection connection)
+        public RegisterAddressRepository(IDbConnection connection)
         {
             _connection = connection;
         }
-        public async Task<int> RegisterDirection(DirectionModel direction)
+        public async Task<int> RegisterAddress(AddressModel address)
         {
             using (TransactionScope trans = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             using (IDbConnection connection = new NpgsqlConnection(_connection.ConnectionString))
@@ -38,7 +38,7 @@ namespace Scharff.Infrastructure.Repositories.Direction.RegisterDirection
                                             @IdClient,
                                             @Direction) RETURNING Id;";
 
-                    int idInsert = await connection.ExecuteScalarAsync<int>(insert, direction);
+                    int idInsert = await connection.ExecuteScalarAsync<int>(insert, address);
                     trans.Complete();
                     return idInsert;
                 }

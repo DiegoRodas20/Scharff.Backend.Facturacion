@@ -47,14 +47,14 @@ namespace Scharff.API.Controllers
         //}
         [HttpPost]
         [SwaggerOperation("Registrar direccion")]
-        public async Task<IActionResult> RegisterDirection([FromBody] RegisterDirectionCommand request)
+        public async Task<IActionResult> RegisterDirection([FromBody] RegisterAddressCommand request)
         {
             var result = await _mediator.Send(request);
             return Ok(result);
         }
         [HttpPut(template: "{id}")]
         [SwaggerOperation("Actualizar direccion")]
-        public async Task<IActionResult> UpdateDirection(int id, [FromBody] UpdateDirectionCommand request)
+        public async Task<IActionResult> UpdateDirection(int id, [FromBody] UpdateAddressCommand request)
         {
             request.Id = id;
             var result = await _mediator.Send(request);
@@ -63,7 +63,7 @@ namespace Scharff.API.Controllers
 
         [HttpDelete(template: "{id}")]
         [SwaggerOperation("Eliminar direccion")]
-        public async Task<IActionResult> DeleteDirection(int id, [FromBody] DeleteDirectionCommand request)
+        public async Task<IActionResult> DeleteDirection(int id, [FromBody] DeleteAddressCommand request)
         {
             request.Id = id;
             var result = await _mediator.Send(request);

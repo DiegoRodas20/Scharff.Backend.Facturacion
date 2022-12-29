@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Scharff.Application.Commands.Direction.DeleteDirection
 {
-    public class DeleteDirectionCommand : IRequest<ResponseModel>
+    public class DeleteAddressCommand : IRequest<ResponseModel>
     {
         public int Id { get; set; }
 

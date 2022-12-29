@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Npgsql;
 using Scharff.API.Utils.GlobalHandlers;
+using Scharff.Infrastructure.Queries.Address.GetAddressByIdClient;
+
 using Scharff.Infrastructure.Queries.Client.GetAllClients;
 using Scharff.Infrastructure.Queries.Client.GetClientById;
 using Scharff.Infrastructure.Queries.Contact.GetContactById;
@@ -43,11 +45,13 @@ builder.Services.AddTransient(typeof(IRegisterContactRepository), typeof(Registe
 builder.Services.AddTransient(typeof(IUpdateContactRepository), typeof(UpdateContactRepository));
 builder.Services.AddTransient(typeof(IDeleteContactRepository), typeof(DeleteContactRepository));
 
-builder.Services.AddTransient(typeof(IGetDirectionById), typeof(GetDirectionById));
-builder.Services.AddTransient(typeof(IRegisterDirectionRepository), typeof(RegisterDirectionRepository));
+builder.Services.AddTransient(typeof(IGetAddressByIdClient), typeof(GetAddressByIdClient));
+builder.Services.AddTransient(typeof(IRegisterAddressRepository), typeof(RegisterAddressRepository));
+
+builder.Services.AddTransient(typeof(IGetAddressById), typeof(GetAddressById));
 
 builder.Services.AddTransient(typeof(IUpdateDirectionRepository), typeof(UpdateDirectionRepository));
-builder.Services.AddTransient(typeof(IDeleteDirectionRepository), typeof(DeleteDirectionRepository));
+builder.Services.AddTransient(typeof(IDeleteAddressRepository), typeof(DeleteAddressRepository));
 
 
 Assembly application = AppDomain.CurrentDomain.Load("Scharff.Application");

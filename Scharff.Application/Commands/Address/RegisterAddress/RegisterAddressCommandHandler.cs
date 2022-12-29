@@ -11,25 +11,25 @@ using System.Threading.Tasks;
 
 namespace Scharff.Application.Commands.Direction.RegisterDirection
 {
-    public class RegisterDirectionCommandHandler : IRequestHandler<RegisterDirectionCommand, int>
+    public class RegisterAddressCommandHandler : IRequestHandler<RegisterAddressCommand, int>
     {
-        private readonly IRegisterDirectionRepository _registerDirectionRepository;
-        public RegisterDirectionCommandHandler(IRegisterDirectionRepository registerDirectionRepository)
+        private readonly IRegisterAddressRepository _registerAddressRepository;
+        public RegisterAddressCommandHandler(IRegisterAddressRepository registerAddressRepository)
         {
-            _registerDirectionRepository = registerDirectionRepository;
+            _registerAddressRepository = registerAddressRepository;
         }
 
-        public async Task<int> Handle(RegisterDirectionCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(RegisterAddressCommand request, CancellationToken cancellationToken)
         {
 
-            DirectionModel model = new()
+            AddressModel model = new()
             {
                 TypeDirectionParameter = request.tipoDireccion_parametro,
                 IdClient = request.idCliente,
                 Direction = request.direccion,
             };
 
-            var result = await _registerDirectionRepository.RegisterDirection(model);
+            var result = await _registerAddressRepository.RegisterAddress(model);
             return result;
         }
     }

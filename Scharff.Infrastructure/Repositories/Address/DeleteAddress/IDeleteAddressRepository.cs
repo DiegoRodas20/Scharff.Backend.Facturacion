@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Scharff.Infrastructure.Repositories.Direction.DeleteDirection
 {
-    public  interface IDeleteDirectionRepository
+    public  interface IDeleteAddressRepository
     {
-        Task<ResponseModel> DeleteDirection(int Id);
+        Task<ResponseModel> DeleteAddress(int Id);
 
     }
 }

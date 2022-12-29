@@ -23,7 +23,7 @@ namespace Scharff.Infrastructure.Repositories.Direction.UpdateDirection
         {
             _connection = connection;
         }
-        public async Task<ResponseModel> UpdateDirection(DirectionModel direction)
+        public async Task<ResponseModel> UpdateDirection(AddressModel direction)
         {
             using (TransactionScope trans = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             using (IDbConnection connection = new NpgsqlConnection(_connection.ConnectionString))
@@ -32,16 +32,13 @@ namespace Scharff.Infrastructure.Repositories.Direction.UpdateDirection
                 {
 
                     string update = @"  UPDATE DIRECCION 
-                                        SET estado = @Status, 
-                                            tipoDireccion_parametro = @TypeDirectionParameter,
-                                            idCliente = @IdClient,
-                                            idUbigeo = @IdUbigeo,
-                                            direccion = @Direction,
-                                            codigoPostal = @PostalCode,
-                                            fechaCreacion = @CreationDate ,
-                                            autorCreacion = @AuthorCreation,
-                                            fechaModificacion = @DateUpdate,
-                                            autorModificacion = @AuthorUpdate
+                                        SET 
+                                            ""tipoDireccion_parametro"" = @TypeDirectionParameter,                                            
+                                            ""idUbigeo"" = @IdUbigeo,
+                                            ""direccion"" = @Direction,
+                                            ""codigoPostal"" = @PostalCode,                                            
+                                            ""fechaModificacion"" = @DateUpdate,
+                                            ""autorModificacion"" = @AuthorUpdate
                                         WHERE 
                                             Id= @Id ;";
 
