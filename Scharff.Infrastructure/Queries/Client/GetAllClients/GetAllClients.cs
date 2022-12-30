@@ -19,7 +19,7 @@ namespace Scharff.Infrastructure.Queries.Client.GetAllClients
             {
                 try
                 {
-                    string sql = @"SELECT * FROM CLIENTE";
+                    string sql = @"SELECT * FROM nsf.client";
 
                     IEnumerable<ClientModel> clients = await connection.QueryAsync<ClientModel>(sql);
                     return clients.ToList();

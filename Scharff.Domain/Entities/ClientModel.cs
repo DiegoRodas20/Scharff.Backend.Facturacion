@@ -1,40 +1,42 @@
-﻿namespace Scharff.Domain.Entities
+﻿using System.Reflection.Metadata;
+
+namespace Scharff.Domain.Entities
 {
     public class ClientModel
     {
         public int id { get; set; }
-        public int tipoCliente_parametro { get; set; }
-        public string? numeroDocumentoIdentidad { get; set; }
-        public int? codigoSegmentacion_parametro { get; set; }
-        public int tipoDocumentoIdentidad { get; set; }
-        public int idUbicacionGeografica { get; set; }
-        public string? razonSocial { get; set; }
-        public int? codigoSector_parametro { get; set; }
-        public string? telefono { get; set; }
-        public string? cuentaFedex { get; set; }
-        public bool? cuentaAutorizadaFedex { get; set; }
-        public DateTime fechaAutorizacionFedex { get; set; }
-        public string? nombreComercial { get; set; }
-        public string? comentario { get; set; }
-        public int? tipoMoneda_parametro { get; set; }
-        public int? grupoEmpresarial_parametro { get; set; }
-        public int? holding_parametro { get; set; }
-        public string? codigoSap { get; set; }
-        public bool estadoCliente { get; set; }
-        public int estadoSap_parametro { get; set; }
-        public int estadoSR_parametro { get; set; }
-        public DateTime fechaCreacion { get; set; }
-        public int autorCreacion { get; set; }
-        public DateTime fechaModificacion { get; set; }
-        public int autorModificacion { get; set; }
+        public int type_param { get; set; } //tipoCliente_parametro 
+        public string? identity_document_number { get; set; } //numeroDocumentoIdentidad
+        public int? segmentation_code_param { get; set; } //codigoSegmentacion_parametro
+        public int document_type_id { get; set; } //tipoDocumentoIdentidad
+        public int geographic_location_id { get; set; } //idUbicacionGeografica
+        public string? business_name { get; set; } //razonSocial
+        public int? industry_code_param { get; set; } //codigoSector_parametro
+        public string? telephone { get; set; } //telefono
+        public string? fedex_account { get; set; } //cuentaFedex
+        public bool? fedex_authorized_account { get; set; } //cuentaAutorizadaFedex
+        public DateTime fedex_authorization_date { get; set; } //fechaAutorizacionFedex
+        public string? commercial_name { get; set; } //nombreComercial
+        public string? comment { get; set; } //comentario
+        public int? currency_type { get; set; } //tipoMoneda_parametro
+        public int? corporate_group_param { get; set; } //grupoEmpresarial_parametro
+        public int? holding_param { get; set; } //holding_parametro
+        public string? sap_id { get; set; } //codigoSap
+        public bool status { get; set; } //estadoCliente
+        public int sap_state_param { get; set; } //estadoSap_parametro
+        public int validate_status_param { get; set; } //estadoSR_parametro
+        public DateTime creation_date { get; set; } //fechaCreacion
+        public int creation_author { get; set; } //autorCreacion
+        public DateTime modification_date { get; set; } //fechaModificacion
+        public int modification_author { get; set; } //autorModificacion
 
         //Descripciones tabla Parametro
-        public string? descripcionGrupoEmpresarial { get; set; }
-        public string? descripcionCodigoSector { get; set; }
-        public string? descripcionTipoMoneda { get; set; }
-        public string? descripcionTipoDocumentoIdentidad { get; set; }
-        public string? descripcionHolding { get; set; }
-        public string? descripcionCodigoSegmentacion { get; set; }
+        public string? business_group_description { get; set; } //descripcionGrupoEmpresarial
+        public string? sector_code_description { get; set; } //descripcionCodigoSector
+        public string? coin_type_description { get; set; } //descripcionTipoMoneda
+        public string? identity_document_type_description { get; set; } //descripcionTipoDocumentoIdentidad
+        public string? holding_description { get; set; } //descripcionHolding
+        public string? segmentation_code_description { get; set; } //descripcionCodigoSegmentacion
 
     }
 }

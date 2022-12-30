@@ -18,9 +18,14 @@ namespace Scharff.Infrastructure.Repositories.Client.DisableClient
             using (IDbConnection connection = new NpgsqlConnection(_connection.ConnectionString))
             {
                 try {
+                    //string update = $@"UPDATE 
+                    //                     public.cliente SET
+                    //                        ""estadoCliente"" = false
+                    //                     WHERE
+                    //                        id = @idClient";
                     string update = $@"UPDATE 
-                                         public.cliente SET
-                                            ""estadoCliente"" = false
+                                         nsf.client SET
+                                            status = false
                                          WHERE
                                             id = @idClient";
 
