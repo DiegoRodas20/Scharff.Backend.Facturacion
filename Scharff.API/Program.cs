@@ -28,17 +28,6 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var port = Environment.GetEnvironmentVariable("PORT");
-if(port != null)
-{
-    builder.WebHost.UseUrls($"http://localhost:{port})");
-}
-else
-{
-    builder.WebHost.UseUrls($"https://localhost:7170");
-}
-
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -104,5 +93,13 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseMiddleware<GlobalErrorHandler>();
 
-app.Run();
+var port = Environment.GetEnvironmentVariable("PORT");
+if (port != null)
+{
+    app.Run($"http://localhost:{port})");
+}
+else
+{
+    app.Run($"https://localhost:7170");
+}
 
