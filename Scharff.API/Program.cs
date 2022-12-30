@@ -31,7 +31,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IDbConnection>(x => new NpgsqlConnection(builder.Configuration.GetConnectionString("Server=scharff-nsf-dev-dbserver.postgres.database.azure.com;Database=scharff_nsf;User Id=scharff_nsf_db_admin@scharff-nsf-dev-dbserver;Password=3$3DB9Nm29ZC;")));
+builder.Services.AddTransient<IDbConnection>(x => new NpgsqlConnection("Server=scharff-nsf-dev-dbserver.postgres.database.azure.com;Database=scharff_nsf;User Id=scharff_nsf_db_admin@scharff-nsf-dev-dbserver;Password=3$3DB9Nm29ZC;"));
 
 builder.Services.AddCors(options =>
     {
@@ -91,6 +91,6 @@ app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-//app.UseMiddleware<GlobalErrorHandler>();
+app.UseMiddleware<GlobalErrorHandler>();
 
 app.Run();
