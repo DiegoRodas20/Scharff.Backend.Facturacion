@@ -93,13 +93,4 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseMiddleware<GlobalErrorHandler>();
 
-var port = Environment.GetEnvironmentVariable("PORT");
-if (port != null)
-{
-    app.Run($"http://localhost:{port})");
-}
-else
-{
-    app.Run($"https://localhost:7170");
-}
-
+app.Run();
