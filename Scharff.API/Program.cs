@@ -9,6 +9,7 @@ using Scharff.Infrastructure.Queries.Contact.GetContactById;
 using Scharff.Infrastructure.Queries.Direction.GetDirectionById;
 using Scharff.Infrastructure.Queries.Utils.VerifyIdentityClient;
 using Scharff.Infrastructure.Repositories.Client.DisableClient;
+using Scharff.Infrastructure.Repositories.Client.EnableClient;
 using Scharff.Infrastructure.Repositories.Client.RegisterClient;
 using Scharff.Infrastructure.Repositories.Client.UpdateClient;
 using Scharff.Infrastructure.Repositories.Contact.DeleteContact;
@@ -47,6 +48,7 @@ builder.Services.AddTransient(typeof(IRegisterClientRepository), typeof(Register
 builder.Services.AddTransient(typeof(IUpdateClientRepository), typeof(UpdateClientRepository));
 builder.Services.AddTransient(typeof(IGetAllClients), typeof(GetAllClients));
 builder.Services.AddTransient(typeof(IDisableClientRepository), typeof(DisableClientRepository));
+builder.Services.AddTransient(typeof(IEnableClientRepository), typeof(EnableClientRepository));
 
 builder.Services.AddTransient(typeof(IGetContactByIdClientQuery), typeof(GetContactByIdClientQuery));
 builder.Services.AddTransient(typeof(IGetContactByIdQuery), typeof(GetContactByIdQuery));
@@ -82,11 +84,14 @@ builder.Services.AddMediatR(application);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 app.UseAuthorization();
