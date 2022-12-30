@@ -42,13 +42,13 @@ namespace Scharff.Infrastructure.Queries.Client.GetClientById
 										F.description as segmentation_code_description --F.descripcion as descripcionCodigoSegmentacion
 									FROM 
 										nsf.client A INNER JOIN
-										nsf.parameter B ON B.detail_id = A.corporate_group_param and B.group_id = (ingresar codigo de grupo) INNER JOIN --A.grupoEmpresarial_parametro 
-										nsf.parameter C ON C.detail_id = A.industry_code_param and C.group_id = (ingresar codigo de grupo) INNER JOIN --codigoSector_parametro 
-										nsf.parameter D ON D.detail_id = A.currency_type and D.group_id = (ingresar codigo de grupo) INNER JOIN --tipoMoneda_parametro 
-										nsf.parameter E ON E.detail_id = A.holding_param and E.group_id = (ingresar codigo de grupo) INNER JOIN --holding_parametro
-										nsf.parameter F ON F.detail_id = A.segmentation_code_param and F.group_id = (ingresar codigo de grupo) INNER JOIN --codigoSegmentacion_parametro 
+										nsf.parameter B ON B.detail_id = A.corporate_group_param and B.group_id = 1 INNER JOIN --A.grupoEmpresarial_parametro 
+										nsf.parameter C ON C.detail_id = A.industry_code_param and C.group_id = 2 INNER JOIN --codigoSector_parametro 
+										nsf.parameter D ON D.detail_id = A.currency_type and D.group_id = 3 INNER JOIN --tipoMoneda_parametro 
+										nsf.parameter E ON E.detail_id = A.holding_param and E.group_id = 4 INNER JOIN --holding_parametro
+										nsf.parameter F ON F.detail_id = A.segmentation_code_param and F.group_id = 5 INNER JOIN --codigoSegmentacion_parametro 
 										--TIPO_DOCUMENTO_IDENTIDAD G ON G.id = A.tipoDocumentoIdentidad
-										nsf.parameter G ON G.detail_id = A.document_type_id and G.group_id = (ingresar codigo de grupo) --segmentation_code_param
+										nsf.parameter G ON G.detail_id = A.document_type_id and G.group_id = 6 --tipoDocumentoIdentidad
 									WHERE
 										A.id = @idClient";
 
