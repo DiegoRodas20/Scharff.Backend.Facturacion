@@ -28,6 +28,17 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var port = Environment.GetEnvironmentVariable("PORT");
+if(port != null)
+{
+    builder.WebHost.UseUrls($"https://localhost:{port})");
+}
+else
+{
+    builder.WebHost.UseUrls($"https://localhost:7170");
+}
+
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
