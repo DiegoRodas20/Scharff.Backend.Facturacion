@@ -31,7 +31,7 @@ var builder = WebApplication.CreateBuilder(args);
 var port = Environment.GetEnvironmentVariable("PORT");
 if(port != null)
 {
-    builder.WebHost.UseUrls($"https://scharffbackendfacturacion-production.up.railway.app");
+    builder.WebHost.UseUrls($"http://localhost:{port})");
 }
 else
 {
