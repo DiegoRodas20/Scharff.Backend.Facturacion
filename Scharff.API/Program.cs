@@ -91,6 +91,6 @@ app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-app.UseMiddleware<GlobalErrorHandler>();
+//app.UseMiddleware<GlobalErrorHandler>();
 
 app.Run();
