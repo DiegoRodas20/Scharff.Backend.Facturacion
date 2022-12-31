@@ -5,10 +5,10 @@ namespace Scharff.Application.Commands.Contact.UpdateContact
     public class UpdateContactCommand : IRequest<int>
     {
         public int Id { get; set; }
-        public int tipoContacto_parametro { get; set; }
-        public int areaContacto_parametro { get; set; }
-        public string? nombreCompleto { get; set; }
-        public string? comentario { get; set; }
+        public int type_param { get; set; }
+        public int area_param { get; set; }
+        public string? full_name { get; set; }
+        public string? comment { get; set; }
         public List<UpdatePhoneContactModelDTO> telefonosContacto { get; set; }
 
         public List<UpdateEmailContactModelDTO> emailscontacto { get; set; }

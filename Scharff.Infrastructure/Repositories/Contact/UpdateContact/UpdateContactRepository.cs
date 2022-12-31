@@ -22,13 +22,13 @@ namespace Scharff.Infrastructure.Repositories.Contact.UpdateContact
             {
                 try
                 {
-                    string update = @"  UPDATE public.contacto 
+                    string update = @"  UPDATE nsf.contact
                                         SET                                             
-                                            ""tipoContacto_parametro"" = @tipoContacto_parametro,
-                                            ""areaContacto_parametro"" = @areaContacto_parametro,
-                                            ""nombreCompleto"" = @nombreCompleto,
-                                            ""comentario"" = @comentario,
-                                            ""fechaActualizacion"" = @fechaActualizacion
+                                            ""type_param"" = @type_param,
+                                            ""area_param"" = @area_param,
+                                            ""full_name"" = @full_name,
+                                            ""comment"" = @comment,
+                                            ""modification_date"" = @modification_date
                                         WHERE 
                                             Id= @Id ;";
 

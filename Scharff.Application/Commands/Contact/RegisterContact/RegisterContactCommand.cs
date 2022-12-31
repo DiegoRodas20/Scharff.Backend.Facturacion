@@ -4,11 +4,11 @@ namespace Scharff.Application.Commands.Contact.RegisterContact
 {
     public class RegisterContactCommand : IRequest<int>
     {
-        public int idCliente { get; set; }
-        public int tipoContacto_parametro { get; set; }
-        public int areaContacto_parametro { get; set; }
-        public string? nombreCompleto { get; set; }
-        public string? comentario { get; set; }
+        public int client_id { get; set; }
+        public int type_param { get; set; }
+        public int area_param { get; set; }
+        public string? full_name { get; set; }
+        public string? comment { get; set; }
 
         public List<RegisterPhoneContactModelDTO> telefonosContacto { get; set; }
 

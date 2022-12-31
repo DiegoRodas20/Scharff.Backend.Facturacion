@@ -19,43 +19,43 @@ namespace Scharff.Infrastructure.Queries.Contact.GetContactById
             {
                 try
                 {
-                    string sql = @"SELECT 
+                        string sql = @"SELECT 
 	                                tc.Id as Id,
-	                                tc.""nombreCompleto"" as nombreCompleto,
-	                                tpdac.""descripcion"" as descripcionAreaContacto,
-	                                tpdtc.""descripcion"" as descripcionTipoContacto,
-	                                ttc.telefono as telefono,
+	                                tc.full_name as nombreCompleto,
+	                                tpdac.description as descripcionAreaContacto,
+	                                tpdtc.description as descripcionTipoContacto,
+	                                ttc.telephone as telefono,
 	                                tec.email as email	   
-                                FROM public.contacto  as tc
-                                    INNER JOIN public.parametro_detalle tpdac on tpdac.id = tc.""areaContacto_parametro""
-                                    INNER JOIN public.parametro_detalle tpdtc on tpdtc.id = tc.""tipoContacto_parametro""
+                                FROM nsf.contact  as tc
+                                    LEFT JOIN nsf.parameter tpdac on tpdac.id = tc.area_param
+                                    LEFT JOIN nsf.parameter tpdtc on tpdtc.id = tc.type_param
                                     INNER JOIN LATERAL  
                                     (
-                                    	SELECT tmptc.""idContacto"",tmptc.""id"",tmptc.telefono
+                                    	SELECT tmptc.contact_id,tmptc.id,tmptc.telephone
                                     	FROM
-                                    	public.telefono_contacto tmptc  
-                                    	WHERE tmptc.""idContacto"" =  tc.Id 
-                                    	AND tmptc.""id"" = 
+                                    	nsf.phone_contact tmptc  
+                                    	WHERE tmptc.contact_id =  tc.Id 
+                                    	AND tmptc.id = 
                                     	(
-                                    		SELECT MIN(x.""id"") FROM
-                                    		public.telefono_contacto x  
-                                    		WHERE x.""idContacto"" =  tc.Id 
+                                    		SELECT MIN(x.id) FROM
+                                    		nsf.phone_contact x  
+                                    		WHERE x.contact_id =  tc.Id 
                                     	)
-                                    ) ttc on ttc.""idContacto"" = tc.Id 
+                                    ) ttc on ttc.contact_id = tc.Id 
                                     INNER JOIN LATERAL  
                                     (
-                                    	SELECT tmpte.""idContacto"",tmpte.""id"",tmpte.email
+                                    	SELECT tmpte.contact_id,tmpte.id,tmpte.email
                                     	FROM
-                                    	public.email_contacto tmpte  
-                                    	WHERE tmpte.""idContacto"" =  tc.Id 
-                                    	AND tmpte.""id"" = 
+                                    	nsf.email_contact tmpte  
+                                    	WHERE tmpte.contact_id =  tc.Id 
+                                    	AND tmpte.id = 
                                     	(
-                                    		SELECT MIN(x.""id"") FROM
-                                    		public.email_contacto x  
-                                    		WHERE x.""idContacto"" =  tc.Id 
+                                    		SELECT MIN(x.id) FROM
+                                    		nsf.email_contact x  
+                                    		WHERE x.contact_id =  tc.Id 
                                     	)
-                                    ) tec on tec.""idContacto"" = tc.Id 
-                                    WHERE ""idCliente"" = @idClient and tc.estado = 'true'
+                                    ) tec on tec.contact_id = tc.Id 
+                                    WHERE client_id = @idClient and tc.status = 'true'
                                      ";
 
                     var queryArgs = new { idClient };

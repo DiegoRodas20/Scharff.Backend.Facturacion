@@ -22,10 +22,10 @@ namespace Scharff.Infrastructure.Repositories.Contact.UpdateEmailContact
             {
                 try
                 {
-                    string update = @"  UPDATE public.email_contacto 
+                    string update = @"  UPDATE nsf.email_contact 
                                         SET  
                                             ""email"" = @email,
-                                            ""fechaModificacion"" = @fechaModificacion
+                                            ""modification_date"" = @modification_date
                                         WHERE 
                                             Id= @Id ;";
 

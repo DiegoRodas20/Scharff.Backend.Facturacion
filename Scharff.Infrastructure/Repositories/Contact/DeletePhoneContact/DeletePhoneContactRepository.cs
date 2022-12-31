@@ -13,7 +13,7 @@ namespace Scharff.Infrastructure.Repositories.Contact.DeletePhoneContact
         {
             _connection = connection;
         }
-
+    
         public async Task<int> DeletePhoneContact(int IdContacto)
         {
             using (TransactionScope trans = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
@@ -23,9 +23,9 @@ namespace Scharff.Infrastructure.Repositories.Contact.DeletePhoneContact
                 {
 
                     string delete = @" DELETE  
-                                       FROM public.telefono_contacto
+                                       FROM nsf.phone_contact
                                        WHERE 
-                                       ""idContacto""= @IdContacto ;"
+                                       contact_id= @IdContacto ;"
                     ;
 
 
