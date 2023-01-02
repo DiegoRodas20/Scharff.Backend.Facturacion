@@ -24,9 +24,9 @@ namespace Scharff.Application.Commands.Direction.RegisterDirection
 
             AddressModel model = new()
             {
-                TypeDirectionParameter = request.tipoDireccion_parametro,
-                IdClient = request.idCliente,
-                Direction = request.direccion,
+                type_param = request.type_param,
+                client_id = request.client_id,
+                address = request.address,
             };
 
             var result = await _registerAddressRepository.RegisterAddress(model);

@@ -5,7 +5,7 @@ using Scharff.Infrastructure.Queries.Address.GetAddressByIdClient;
 
 namespace Scharff.Application.Queries.Address.GetAddressByIdClient
 {
-    internal class GetAddressByIdClientHandler : IRequestHandler<GetAddressByIdClientQuery, List<DirectionModel>>
+    internal class GetAddressByIdClientHandler : IRequestHandler<GetAddressByIdClientQuery, List<AddressModel>>
     {
         private readonly IGetAddressByIdClient _getDirectionByIdClientQuery;
 
@@ -13,9 +13,9 @@ namespace Scharff.Application.Queries.Address.GetAddressByIdClient
         {
             _getDirectionByIdClientQuery = getDirectionByIdQuery;
         }
-        public async Task<List<DirectionModel>> Handle(GetAddressByIdClientQuery request, CancellationToken cancellationToken)
+        public async Task<List<AddressModel>> Handle(GetAddressByIdClientQuery request, CancellationToken cancellationToken)
         {
-            var result = await _getDirectionByIdClientQuery.GetDirectionByIdClient(request.IdCliente);
+            var result = await _getDirectionByIdClientQuery.GetDirectionByIdClient(request.client_id);
             return result;
         }
     }

@@ -29,14 +29,14 @@ namespace Scharff.Infrastructure.Repositories.Direction.RegisterDirection
                 try
                 {
 
-                    string insert = @"  INSERT INTO DIRECCION 
-                                            (""tipoDireccion_parametro"",
-                                            ""idCliente"",
-                                            ""direccion"")
+                    string insert = @"  INSERT INTO nsf.address 
+                                            (""type_param"",
+                                            ""client_id"",
+                                            ""address"")
                                         VALUES 
-                                            (@TypeDirectionParameter, 
-                                            @IdClient,
-                                            @Direction) RETURNING Id;";
+                                            (@type_param, 
+                                            @client_id,
+                                            @address) RETURNING Id;";
 
                     int idInsert = await connection.ExecuteScalarAsync<int>(insert, address);
                     trans.Complete();

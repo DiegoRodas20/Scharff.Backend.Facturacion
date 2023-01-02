@@ -22,10 +22,10 @@ namespace Scharff.Application.Commands.Direction.DeleteDirection
         {
             AddressModel model = new()
             {
-                Id = request.Id
+                id = request.Id
             };
 
-            var result = await _deleteAddressRepository.DeleteAddress(model.Id);
+            var result = await _deleteAddressRepository.DeleteAddress(model.id);
             return result;
         }
     }

@@ -9,6 +9,6 @@ namespace Scharff.Infrastructure.Queries.Address.GetAddressByIdClient
 {
     public interface IGetAddressByIdClient
     {
-        Task<List<DirectionModel>> GetDirectionByIdClient(int idClient);
+        Task<List<AddressModel>> GetDirectionByIdClient(int idClient);
     }
 }

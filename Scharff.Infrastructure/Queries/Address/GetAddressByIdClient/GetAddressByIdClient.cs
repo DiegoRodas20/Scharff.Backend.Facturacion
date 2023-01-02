@@ -14,15 +14,15 @@ namespace Scharff.Infrastructure.Queries.Address.GetAddressByIdClient
         {
             _connection = connection;
         }
-        public async Task<List<DirectionModel>> GetDirectionByIdClient(int idClient)
+        public async Task<List<AddressModel>> GetDirectionByIdClient(int idClient)
         {
             using (IDbConnection connection = new NpgsqlConnection(_connection.ConnectionString))
             {
                 try
                 {
-                    string sql = @"SELECT * FROM DIRECCION WHERE ""idCliente"" = @idClient";
+                    string sql = @"SELECT * FROM nsf.address WHERE ""client_id"" = @idClient";
                     var queryArgs = new { idClient };
-                    IEnumerable<DirectionModel> direction = await connection.QueryAsync<DirectionModel>(sql, queryArgs);
+                    IEnumerable<AddressModel> direction = await connection.QueryAsync<AddressModel>(sql, queryArgs);
                     return direction.ToList();
                 }
                 catch (NpgsqlException err)
