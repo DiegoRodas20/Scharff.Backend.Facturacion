@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Scharff.Infrastructure.Repositories.Client.DisableClient
 {
-    internal interface IDisableClient
+    public interface IDisableClientRepository
     {
+        Task<int> DisableClient(int idClient);
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Scharff.Infrastructure.Repositories.Client.EnableClient
 {
-    internal interface IEnableClient
+    public interface IEnableClientRepository
     {
+        Task<int> EnableClient(int idClient);
     }
 }

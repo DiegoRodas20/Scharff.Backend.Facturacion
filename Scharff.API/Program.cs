@@ -7,6 +7,9 @@ using Scharff.Infrastructure.Queries.Client.GetAllClients;
 using Scharff.Infrastructure.Queries.Client.GetClientById;
 using Scharff.Infrastructure.Queries.Contact.GetContactById;
 using Scharff.Infrastructure.Queries.Direction.GetDirectionById;
+using Scharff.Infrastructure.Queries.Utils.VerifyIdentityClient;
+using Scharff.Infrastructure.Repositories.Client.DisableClient;
+using Scharff.Infrastructure.Repositories.Client.EnableClient;
 using Scharff.Infrastructure.Repositories.Client.RegisterClient;
 using Scharff.Infrastructure.Repositories.Client.UpdateClient;
 using Scharff.Infrastructure.Repositories.Contact.DeleteContact;
@@ -29,7 +32,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IDbConnection>(x => new NpgsqlConnection(builder.Configuration.GetConnectionString("Scharff_BD")));
+builder.Services.AddTransient<IDbConnection>(x => new NpgsqlConnection("Server=scharff-nsf-dev-dbserver.postgres.database.azure.com;Database=scharff_nsf;User Id=scharff_nsf_db_admin@scharff-nsf-dev-dbserver;Password=3$3DB9Nm29ZC;"));
 
 builder.Services.AddCors(options =>
     {
@@ -44,6 +47,8 @@ builder.Services.AddTransient(typeof(IGetClientByIdQuery), typeof(GetClientByIdQ
 builder.Services.AddTransient(typeof(IRegisterClientRepository), typeof(RegisterClientRepository));
 builder.Services.AddTransient(typeof(IUpdateClientRepository), typeof(UpdateClientRepository));
 builder.Services.AddTransient(typeof(IGetAllClients), typeof(GetAllClients));
+builder.Services.AddTransient(typeof(IDisableClientRepository), typeof(DisableClientRepository));
+builder.Services.AddTransient(typeof(IEnableClientRepository), typeof(EnableClientRepository));
 
 builder.Services.AddTransient(typeof(IGetContactByIdClientQuery), typeof(GetContactByIdClientQuery));
 builder.Services.AddTransient(typeof(IGetContactByIdQuery), typeof(GetContactByIdQuery));
@@ -71,17 +76,22 @@ builder.Services.AddTransient(typeof(IGetAddressById), typeof(GetAddressById));
 builder.Services.AddTransient(typeof(IUpdateDirectionRepository), typeof(UpdateDirectionRepository));
 builder.Services.AddTransient(typeof(IDeleteAddressRepository), typeof(DeleteAddressRepository));
 
+builder.Services.AddTransient(typeof(IVerifyIdentityClientQuery), typeof(VerifyIdentityClientQuery));
+
 
 Assembly application = AppDomain.CurrentDomain.Load("Scharff.Application");
 builder.Services.AddMediatR(application);
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 app.UseAuthorization();
@@ -89,4 +99,3 @@ app.MapControllers();
 app.UseMiddleware<GlobalErrorHandler>();
 
 app.Run();
-

@@ -1,6 +1,8 @@
-﻿namespace Scharff.Application.Commands.Client.EnableClient
+﻿using MediatR;
+
+namespace Scharff.Application.Commands.Client.EnableClient
 {
-    public class EnableClientCommand
+    public class EnableClientCommand : IRequest<int>
     {
         public int IdClient { get; set; }
     }

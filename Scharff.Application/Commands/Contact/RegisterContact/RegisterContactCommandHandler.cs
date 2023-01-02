@@ -32,9 +32,9 @@ namespace Scharff.Application.Commands.Contact.RegisterContact
                 {
                     PhoneContactModel modelPhoneContact = new()
                     {
-                        fechaCreacion = DateTime.Now,
-                        idContacto = resultContact,
-                        telefono = item.telefono
+                        creation_date = DateTime.Now,
+                        contact_id = resultContact,
+                        telephone = item.telefono
                     };
 
                     var resultPhoneContact = await _registerPhoneContactRepository.RegisterPhoneContact(modelPhoneContact);
@@ -57,8 +57,8 @@ namespace Scharff.Application.Commands.Contact.RegisterContact
 
                     EmailContactModel modelEmailContact = new()
                     {
-                        fechaCreacion = DateTime.Now,
-                        idContacto = resultContact,
+                        creation_date = DateTime.Now,
+                        contact_id = resultContact,
                         email = item.email
                     };
 
@@ -74,14 +74,14 @@ namespace Scharff.Application.Commands.Contact.RegisterContact
         {
             ContactModel model = new()
             {
-                estado = true,
-                idCliente = request.idCliente,
-                tipoContacto_parametro = request.tipoContacto_parametro,
-                areaContacto_parametro = request.areaContacto_parametro,
-                nombreCompleto = request.nombreCompleto,
-                comentario = request.comentario,
-                fechaCreacion = DateTime.Now,
-                fechaInicio = DateTime.Now,
+                status = true,
+                client_id = request.client_id,
+                type_param = request.type_param,
+                area_param = request.area_param,
+                full_name = request.full_name,
+                comment = request.comment,
+                creation_date = DateTime.Now,
+                start_date = DateTime.Now,
 
             };
 

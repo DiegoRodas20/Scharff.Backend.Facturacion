@@ -22,15 +22,15 @@ namespace Scharff.Infrastructure.Repositories.Contact.RegisterPhoneContact
             {
                 try
                 {
-                    string insert = @"  INSERT INTO public.telefono_contacto 
-                                           (""telefono"", 
-                                            ""idContacto"",
-                                            ""fechaCreacion""
+                    string insert = @"  INSERT INTO nsf.phone_contact 
+                                           (""telephone"", 
+                                            ""contact_id"",
+                                            ""creation_date""
                                             )
                                         VALUES 
-                                            (@telefono, 
-                                            @idContacto, 
-                                            @fechaCreacion
+                                            (@telephone, 
+                                            @contact_id, 
+                                            @creation_date
                                             ) 
                                             RETURNING Id;"
                     ;

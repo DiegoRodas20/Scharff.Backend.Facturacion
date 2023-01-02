@@ -76,24 +76,24 @@ namespace Scharff.API.Controllers
         }
 
 
-        //[HttpPut(template: "{idClient}")]
-        //[SwaggerOperation("Inhabilitar Cliente")]
-        //public async Task<IActionResult> DisableClient(int idClient)
-        //{
-        //    DisableClientCommand request = new() { IdClient = idClient };
-        //    var result = await _mediator.Send(request);
-        //    return Ok(result);
-        //}
+        [HttpPut("disable/{idClient}")]
+        [SwaggerOperation("Inhabilitar Cliente")]
+        public async Task<IActionResult> DisableClient(int idClient)
+        {
+            DisableClientCommand request = new() { IdClient = idClient };
+            var result = await _mediator.Send(request);
+            return Ok(new CustomResponse<int>($"Se inhabilito el cliente con id: {idClient}.", result));
+        }
 
 
-        //[HttpPut(template: "{idClient}")]
-        //[SwaggerOperation("Habilitar Cliente")]
-        //public async Task<IActionResult> EnableClient(int idClient)
-        //{
-        //    EnableClientCommand request = new() { IdClient = idClient };
-        //    var result = await _mediator.Send(request);
-        //    return Ok(result);
-        //}
+        [HttpPut(template: "enable/{idClient}")]
+        [SwaggerOperation("Habilitar Cliente")]
+        public async Task<IActionResult> EnableClient(int idClient)
+        {
+            EnableClientCommand request = new() { IdClient = idClient };
+            var result = await _mediator.Send(request);
+            return Ok(new CustomResponse<int>($"Se habilito el cliente con id: {idClient}.", result));
+        }
 
 
         //[HttpPost]

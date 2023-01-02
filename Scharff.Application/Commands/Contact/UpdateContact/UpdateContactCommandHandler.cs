@@ -31,8 +31,8 @@ namespace Scharff.Application.Commands.Contact.UpdateContact
                 {
                     PhoneContactModel modelPhoneContact = new()
                     {
-                        fechaModificacion = DateTime.Now,
-                        telefono = item.telefono,
+                        modification_date = DateTime.Now,
+                        telephone = item.telefono,
                         Id = item.Id
                     };
 
@@ -56,7 +56,7 @@ namespace Scharff.Application.Commands.Contact.UpdateContact
 
                     EmailContactModel modelEmailContact = new()
                     {
-                        fechaModificacion = DateTime.Now,
+                        modification_date = DateTime.Now,
                         email = item.email,
                         Id = item.Id
 
@@ -75,11 +75,11 @@ namespace Scharff.Application.Commands.Contact.UpdateContact
             ContactModel model = new()
             {
                 Id = request.Id,
-                tipoContacto_parametro = request.tipoContacto_parametro,
-                areaContacto_parametro = request.areaContacto_parametro,
-                nombreCompleto = request.nombreCompleto,
-                comentario = request.comentario,
-                fechaActualizacion = DateTime.Now
+                type_param = request.type_param,
+                area_param = request.area_param,
+                full_name = request.full_name,
+                comment = request.comment,
+                modification_date = DateTime.Now
             };
 
             var resultContact = await _updateContactRepository.UpdateContact(model);

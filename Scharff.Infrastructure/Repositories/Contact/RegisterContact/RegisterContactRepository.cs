@@ -26,25 +26,25 @@ namespace Scharff.Infrastructure.Repositories.Contact.RegisterContact
 
 
 
-                    string insert = @"  INSERT INTO public.contacto 
-                                           (""estado"", 
-                                            ""idCliente"",
-                                            ""tipoContacto_parametro"",
-                                            ""areaContacto_parametro"",
-                                            ""nombreCompleto"",
-                                            ""comentario"",
-                                            ""fechaCreacion"",
-                                            ""fechaInicio""
+                    string insert = @"  INSERT INTO nsf.contact 
+                                           (""status"", 
+                                            ""client_id"",
+                                            ""type_param"",
+                                            ""area_param"",
+                                            ""full_name"",
+                                            ""comment"",
+                                            ""creation_date"",
+                                            ""start_date""
                                             )
                                         VALUES 
-                                            (@estado, 
-                                            @idCliente, 
-                                            @tipoContacto_parametro, 
-                                            @areaContacto_parametro, 
-                                            @nombreCompleto, 
-                                            @comentario,
-                                            @fechaCreacion,
-                                            @fechaInicio
+                                            (@status, 
+                                            @client_id, 
+                                            @type_param, 
+                                            @area_param, 
+                                            @full_name, 
+                                            @comment,
+                                            @creation_date,
+                                            @start_date
                                             ) 
                                             RETURNING Id;";
 

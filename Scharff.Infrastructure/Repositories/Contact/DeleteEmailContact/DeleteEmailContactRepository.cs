@@ -24,9 +24,9 @@ namespace Scharff.Infrastructure.Repositories.Contact.DeleteEmailContact
 
 
                     string delete = @" DELETE  
-                                       FROM public.email_contacto
+                                       FROM nsf.email_contact
                                        WHERE 
-                                       ""idContacto""= @IdContacto ;"
+                                       contact_id= @IdContacto ;"
                     ;
 
 

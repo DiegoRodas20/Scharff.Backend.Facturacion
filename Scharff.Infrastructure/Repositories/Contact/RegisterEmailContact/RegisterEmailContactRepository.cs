@@ -23,15 +23,15 @@ namespace Scharff.Infrastructure.Repositories.Contact.RegisterEmailContact
             {
                 try
                 {
-                    string insert = @"  INSERT INTO public.email_contacto 
+                    string insert = @"  INSERT INTO nsf.email_contact 
                                            (""email"", 
-                                            ""idContacto"",
-                                            ""fechaCreacion""
+                                            ""contact_id"",
+                                            ""creation_date""
                                             )
                                         VALUES 
                                             (@email, 
-                                            @idContacto, 
-                                            @fechaCreacion
+                                            @contact_id, 
+                                            @creation_date
                                             ) 
                                             RETURNING Id;"
                     ;

@@ -22,7 +22,7 @@ namespace Scharff.Infrastructure.Repositories.Contact.DeleteContact
                 {
 
                     string delete = @"  DELETE  
-                                        FROM public.contacto
+                                        FROM nsf.contact
                                         WHERE 
                                         id= @Id ;";
 
