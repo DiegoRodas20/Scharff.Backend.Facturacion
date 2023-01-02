@@ -51,10 +51,10 @@ namespace Scharff.API.Controllers
         public async Task<IActionResult> GetAddressById(int id)
         {
 
-            GetAddressByIdQuery request = new() { Id = id };
+            GetAddressByIdQuery request = new() { id = id };
 
             var result = await _mediator.Send(request);
-            return Ok(new CustomResponse<List<DirectionModel>>($"Se encontraron los datos de la direccion con el id : {id}.", result));
+            return Ok(new CustomResponse<List<AddressModel>>($"Se encontraron los datos de la direccion con el id : {id}.", result));
         }
 
         [HttpPut(template: "{id}")]

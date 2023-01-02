@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Scharff.Application.Queries.Direction.GetDirectionById
 {
-    public class GetAddressByIdHandler : IRequestHandler<GetAddressByIdQuery, List<DirectionModel>>
+    public class GetAddressByIdHandler : IRequestHandler<GetAddressByIdQuery, List<AddressModel>>
     {
         private readonly IGetAddressById _getDirectionByIdQuery;
 
@@ -19,9 +19,9 @@ namespace Scharff.Application.Queries.Direction.GetDirectionById
         {
             _getDirectionByIdQuery = getDirectionByIdQuery;
         }
-        public async Task<List<DirectionModel>> Handle(GetAddressByIdQuery request, CancellationToken cancellationToken)
+        public async Task<List<AddressModel>> Handle(GetAddressByIdQuery request, CancellationToken cancellationToken)
         {
-            var result = await _getDirectionByIdQuery.GetDirectionByID(request.Id);
+            var result = await _getDirectionByIdQuery.GetDirectionByID(request.id);
             return result;
         }
     }

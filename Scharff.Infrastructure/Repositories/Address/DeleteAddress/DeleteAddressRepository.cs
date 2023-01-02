@@ -31,7 +31,7 @@ namespace Scharff.Infrastructure.Repositories.Direction.DeleteDirection
                     string delete = @"  DELETE  
                                         FROM nsf.address
                                         WHERE 
-                                        ""id""= @Id ;";
+                                        id= @Id ;";
                     var queryArgs = new { Id };
                     int hasDelete = await connection.ExecuteAsync(delete, queryArgs);
                     if (hasDelete <= 0)
