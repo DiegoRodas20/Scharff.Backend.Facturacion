@@ -37,7 +37,7 @@ namespace Scharff.API.Controllers
 
         [HttpPost]        
         [SwaggerOperation("Registrar direccion")]
-        public async Task<IActionResult> RegisterDirection([FromBody] RegisterAddressCommand request)
+        public async Task<IActionResult> RegisterAddress([FromBody] RegisterAddressCommand request)
         {
             var result = await _mediator.Send(request);
             return Ok(new CustomResponse<int>($"Se inserto la direccion con id: {result}.", result));
@@ -45,7 +45,7 @@ namespace Scharff.API.Controllers
 
 
         [HttpGet(template: "{id}")]
-        [SwaggerResponse(200, "Retorna datos de direccion en base a su id ", typeof(DirectionModel))]
+        [SwaggerResponse(200, "Retorna datos de direccion en base a su id ", typeof(AddressModel))]
         [SwaggerResponse(204, "No se encontro la direccion")]
         [SwaggerResponse(400, "Ocurrio un error de validacion")]
         public async Task<IActionResult> GetAddressById(int id)
@@ -54,12 +54,12 @@ namespace Scharff.API.Controllers
             GetAddressByIdQuery request = new() { Id = id };
 
             var result = await _mediator.Send(request);
-            return Ok(new CustomResponse<List<DirectionModel>>($"Se encontraron los datos de la direccion con el id : {id}.", result));
+            return Ok(new CustomResponse<List<AddressModel>>($"Se encontraron los datos de la direccion con el id : {id}.", result));
         }
 
         [HttpPut(template: "{id}")]
         [SwaggerOperation("Actualizar direccion")]
-        public async Task<IActionResult> UpdateDirection(int id, [FromBody] UpdateAddressCommand request)
+        public async Task<IActionResult> UpdateAddress(int id, [FromBody] UpdateAddressCommand request)
         {
             request.id = id;
             var result = await _mediator.Send(request);
@@ -68,7 +68,7 @@ namespace Scharff.API.Controllers
 
         [HttpDelete(template: "{id}")]
         [SwaggerOperation("Eliminar direccion")]
-        public async Task<IActionResult> DeleteDirection(int id, [FromBody] DeleteAddressCommand request)
+        public async Task<IActionResult> DeleteAddress(int id, [FromBody] DeleteAddressCommand request)
         {
             request.Id = id;
             var result = await _mediator.Send(request);
