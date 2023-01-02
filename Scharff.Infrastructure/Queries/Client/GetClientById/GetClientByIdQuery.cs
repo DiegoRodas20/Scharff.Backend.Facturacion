@@ -21,33 +21,34 @@ namespace Scharff.Infrastructure.Queries.Client.GetClientById
                 try
                 {
                     string sql = @"	 SELECT
-										A.""id"",
-										A.""grupoEmpresarial_parametro"",
-										A.""codigoSector_parametro"",
-										A.""tipoMoneda_parametro"",
-										A.""tipoDocumentoIdentidad"",
-										A.""numeroDocumentoIdentidad"",
-										A.""telefono"",
-										A.""razonSocial"",
-										A.""nombreComercial"",
-										A.""comentario"",
-										A.""holding_parametro"",
-										A.""codigoSegmentacion_parametro"",										
-										A.""estadoCliente"",
-										B.descripcion as ""descripcionGrupoEmpresarial"",
-										C.descripcion as ""descripcionCodigoSector"",
-										D.descripcion as ""descripcionTipoMoneda"",
-										G.descripcion as ""descripcionTipoDocumentoIdentidad"",
-										E.descripcion as ""descripcionHolding"",
-										F.descripcion as ""descripcionCodigoSegmentacion""
+										A.id,
+										A.corporate_group_param, --grupoEmpresarial_parametro,
+										A.industry_code_param, --codigoSector_parametro,
+										A.currency_type, --tipoMoneda_parametro,
+										A.document_type_id, --tipoDocumentoIdentidad,
+										A.identity_document_number, --numeroDocumentoIdentidad,
+										A.telephone, --telefono,
+										A.business_name, --razonSocial,
+										A.commercial_name, --nombreComercial,
+										A.comment, --comentario,
+										A.holding_param, --holding_parametro,
+										A.segmentation_code_param, --codigoSegmentacion_parametro,										
+										A.status, --estadoCliente,
+										B.description as business_group_description, --B.descripcion as descripcionGrupoEmpresarial,
+										C.description as sector_code_description, --C.descripcion as descripcionCodigoSector,
+										D.description as coin_type_description, --D.descripcion as descripcionTipoMoneda,
+										G.description as identity_document_type_description, --G.descripcion as descripcionTipoDocumentoIdentidad,
+										E.description as holding_description, --E.descripcion as descripcionHolding,
+										F.description as segmentation_code_description --F.descripcion as descripcionCodigoSegmentacion
 									FROM 
-										CLIENTE A INNER JOIN
-										PARAMETRO_DETALLE B ON B.id = A.""grupoEmpresarial_parametro"" INNER JOIN
-										PARAMETRO_DETALLE C ON C.id = A.""codigoSector_parametro"" INNER JOIN
-										PARAMETRO_DETALLE D ON D.id = A.""tipoMoneda_parametro"" INNER JOIN
-										PARAMETRO_DETALLE E ON E.id = A.""holding_parametro"" INNER JOIN
-										PARAMETRO_DETALLE F ON F.id = A.""codigoSegmentacion_parametro"" INNER JOIN
-										TIPO_DOCUMENTO_IDENTIDAD G ON G.id = A.""tipoDocumentoIdentidad""
+										nsf.client A INNER JOIN
+										nsf.parameter B ON B.detail_id = A.corporate_group_param and B.group_id = 1 INNER JOIN --A.grupoEmpresarial_parametro 
+										nsf.parameter C ON C.detail_id = A.industry_code_param and C.group_id = 2 INNER JOIN --codigoSector_parametro 
+										nsf.parameter D ON D.detail_id = A.currency_type and D.group_id = 3 INNER JOIN --tipoMoneda_parametro 
+										nsf.parameter E ON E.detail_id = A.holding_param and E.group_id = 4 INNER JOIN --holding_parametro
+										nsf.parameter F ON F.detail_id = A.segmentation_code_param and F.group_id = 5 INNER JOIN --codigoSegmentacion_parametro 
+										--TIPO_DOCUMENTO_IDENTIDAD G ON G.id = A.tipoDocumentoIdentidad
+										nsf.parameter G ON G.detail_id = A.document_type_id and G.group_id = 6 --tipoDocumentoIdentidad
 									WHERE
 										A.id = @idClient";
 

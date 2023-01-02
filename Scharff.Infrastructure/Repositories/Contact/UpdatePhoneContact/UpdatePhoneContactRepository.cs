@@ -23,10 +23,10 @@ namespace Scharff.Infrastructure.Repositories.Contact.UpdatePhoneContact
             {
                 try
                 {
-                    string update = @"  UPDATE public.telefono_contacto 
+                    string update = @"  UPDATE nsf.phone_contact 
                                         SET  
-                                            ""telefono"" = @telefono,
-                                            ""fechaModificacion"" = @fechaModificacion
+                                            ""telephone"" = @telephone,
+                                            ""modification_date"" = @modification_date
                                         WHERE 
                                             Id= @Id ;";
 

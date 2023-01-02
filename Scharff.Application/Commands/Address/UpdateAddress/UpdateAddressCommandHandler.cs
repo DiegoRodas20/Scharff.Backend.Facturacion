@@ -22,17 +22,15 @@ namespace Scharff.Application.Commands.Direction.UpdateDirection
         {
             AddressModel model = new()
             {
-                Id = request.Id,
-                Status = request.Status,
-                TypeDirectionParameter = request.TypeDirectionParameter,
-                IdClient = request.IdClient,
-                IdUbigeo = request.IdUbigeo,
-                Direction = request.Direction,
-                PostalCode = request.PostalCode,
-                CreationDate = request.CreationDate,
-                AuthorCreation = request.AuthorCreation,
-                DateUpdate = request.DateUpdate,
-                AuthorUpdate = request.AuthorUpdate
+                id = request.id,
+                status = request.status,
+                type_param = request.type_param,
+                client_id = request.client_id,
+                ubigeo_id = request.ubigeo_id,
+                address = request.address,
+                postal_code = request.postal_code,
+                modification_date = request.modification_date,
+                modification_author = request.modification_author
 
             };
 

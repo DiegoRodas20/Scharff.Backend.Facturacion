@@ -10,17 +10,16 @@ namespace Scharff.Application.Commands.Direction.UpdateDirection
 {
     public class UpdateAddressCommand :IRequest<ResponseModel>
     {
-        public int Id { get; set; }
-        public Boolean? Status { get; set; }
-        public int TypeDirectionParameter { get; set; }
-        public int IdClient { get; set; }
-        public int IdUbigeo { get; set; }
-        public string Direction { get; set; }
-        public string PostalCode { get; set; }
-        public DateTime? CreationDate { get; set; }
-        public int AuthorCreation { get; set; }
-        public DateTime? DateUpdate { get; set; }
-        public int AuthorUpdate { get; set; }
+        public int id { get; set; }
+        public Boolean? status { get; set; }
+        public int type_param { get; set; }
+        public int client_id { get; set; }
+        public int ubigeo_id { get; set; }
+        public string address { get; set; }
+        public string postal_code { get; set; }
+     
+        public DateTime? modification_date { get; set; }
+        public int modification_author { get; set; }
 
     }
 }

@@ -23,16 +23,16 @@ namespace Scharff.API.Controllers
         }
 
         [HttpGet(template: "GetList/{idClient}")]
-        [SwaggerResponse(200, "Retorna una direccion en base a su id cliente", typeof(DirectionModel))]
+        [SwaggerResponse(200, "Retorna una direccion en base a su id cliente", typeof(AddressModel))]
         [SwaggerResponse(204, "No se encontro direcciones")]
         [SwaggerResponse(400, "Ocurrio un error de validacion")]
         public async Task<IActionResult> GetAddressByIdClient(int idClient)
         {
 
-            GetAddressByIdClientQuery request = new() { IdCliente = idClient };
+            GetAddressByIdClientQuery request = new() { client_id = idClient };
 
             var result = await _mediator.Send(request);
-            return Ok(new CustomResponse<List<DirectionModel>>($"Se encontraron las direcciones con el id cliente: {idClient}.", result));
+            return Ok(new CustomResponse<List<AddressModel>>($"Se encontraron las direcciones con el id cliente: {idClient}.", result));
         }
 
         [HttpPost]        
@@ -61,7 +61,7 @@ namespace Scharff.API.Controllers
         [SwaggerOperation("Actualizar direccion")]
         public async Task<IActionResult> UpdateDirection(int id, [FromBody] UpdateAddressCommand request)
         {
-            request.Id = id;
+            request.id = id;
             var result = await _mediator.Send(request);
             return Ok(result);
         }

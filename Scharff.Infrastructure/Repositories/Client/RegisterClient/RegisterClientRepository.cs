@@ -28,30 +28,55 @@ namespace Scharff.Infrastructure.Repositories.Client.RegisterClient
             {
                 try
                 {
-                    string insert = @"INSERT INTO public.cliente 
-                                            (""tipoDocumentoIdentidad"", 
-                                            ""numeroDocumentoIdentidad"",
-                                            ""razonSocial"",
-                                            ""telefono"",
-                                            ""nombreComercial"",
-                                            ""tipoMoneda_parametro"",
-                                            ""grupoEmpresarial_parametro"",
-                                            ""codigoSector_parametro"",
-                                            ""holding_parametro"",
-                                            ""codigoSegmentacion_parametro"",
-                                            ""comentario"")
+                    //string insert = @"INSERT INTO public.cliente 
+                    //                        (""tipoDocumentoIdentidad"", 
+                    //                        ""numeroDocumentoIdentidad"",
+                    //                        ""razonSocial"",
+                    //                        ""telefono"",
+                    //                        ""nombreComercial"",
+                    //                        ""tipoMoneda_parametro"",
+                    //                        ""grupoEmpresarial_parametro"",
+                    //                        ""codigoSector_parametro"",
+                    //                        ""holding_parametro"",
+                    //                        ""codigoSegmentacion_parametro"",
+                    //                        ""comentario"")
+                    //                    VALUES 
+                    //                        (@tipoDocumentoIdentidad, 
+                    //                        @numeroDocumentoIdentidad, 
+                    //                        @razonSocial, 
+                    //                        @telefono, 
+                    //                        @nombreComercial, 
+                    //                        @tipoMoneda_parametro, 
+                    //                        @grupoEmpresarial_parametro, 
+                    //                        @codigoSector_parametro,
+                    //                        @holding_parametro,                                            
+                    //                        @codigoSegmentacion_parametro,
+                    //                        @comentario) RETURNING Id;";
+
+                    string insert = @"INSERT INTO nsf.client
+                                            (document_type_id, 
+                                            identity_document_number,
+                                            business_name,
+                                            telephone,
+                                            commercial_name,
+                                            currency_type,
+                                            corporate_group_param,
+                                            industry_code_param,
+                                            holding_param,
+                                            segmentation_code_param,
+                                            comment)
                                         VALUES 
-                                            (@tipoDocumentoIdentidad, 
-                                            @numeroDocumentoIdentidad, 
-                                            @razonSocial, 
-                                            @telefono, 
-                                            @nombreComercial, 
-                                            @tipoMoneda_parametro, 
-                                            @grupoEmpresarial_parametro, 
-                                            @codigoSector_parametro,
-                                            @holding_parametro,                                            
-                                            @codigoSegmentacion_parametro,
-                                            @comentario) RETURNING Id;";
+                                            (@document_type_id, 
+                                            @identity_document_number, 
+                                            @business_name, 
+                                            @telephone, 
+                                            @commercial_name, 
+                                            @currency_type, 
+                                            @corporate_group_param, 
+                                            @industry_code_param,
+                                            @holding_param,                                            
+                                            @segmentation_code_param,
+                                            @comment) RETURNING Id;";
 
                     int idInsert = await connection.ExecuteScalarAsync<int>(insert, cliente);
                     trans.Complete();

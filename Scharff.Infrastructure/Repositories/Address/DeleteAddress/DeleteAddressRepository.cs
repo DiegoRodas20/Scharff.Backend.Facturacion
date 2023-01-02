@@ -29,7 +29,7 @@ namespace Scharff.Infrastructure.Repositories.Direction.DeleteDirection
                 {
 
                     string delete = @"  DELETE  
-                                        FROM DIRECCION
+                                        FROM nsf.address
                                         WHERE 
                                         ""id""= @Id ;";
                     var queryArgs = new { Id };

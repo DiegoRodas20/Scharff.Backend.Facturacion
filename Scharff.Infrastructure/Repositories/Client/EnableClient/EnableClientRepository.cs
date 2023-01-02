@@ -24,9 +24,15 @@ namespace Scharff.Infrastructure.Repositories.Client.EnableClient
             {
                 try
                 {
+                    //string update = $@"UPDATE 
+                    //                     public.cliente SET
+                    //                        ""estadoCliente"" = true
+                    //                     WHERE
+                    //                        id = @idClient";
+
                     string update = $@"UPDATE 
-                                         public.cliente SET
-                                            ""estadoCliente"" = true
+                                         nsf.client SET
+                                            status = true
                                          WHERE
                                             id = @idClient";
 

@@ -23,7 +23,7 @@ namespace Scharff.Infrastructure.Repositories.Direction.UpdateDirection
         {
             _connection = connection;
         }
-        public async Task<ResponseModel> UpdateDirection(AddressModel direction)
+        public async Task<ResponseModel> UpdateDirection(AddressModel address)
         {
             using (TransactionScope trans = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             using (IDbConnection connection = new NpgsqlConnection(_connection.ConnectionString))
@@ -31,18 +31,18 @@ namespace Scharff.Infrastructure.Repositories.Direction.UpdateDirection
                 try
                 {
 
-                    string update = @"  UPDATE DIRECCION 
+                    string update = @"  UPDATE nsf.address 
                                         SET 
-                                            ""tipoDireccion_parametro"" = @TypeDirectionParameter,                                            
-                                            ""idUbigeo"" = @IdUbigeo,
-                                            ""direccion"" = @Direction,
-                                            ""codigoPostal"" = @PostalCode,                                            
-                                            ""fechaModificacion"" = @DateUpdate,
-                                            ""autorModificacion"" = @AuthorUpdate
+                                            ""type_param"" = @type_param,                                            
+                                            ""ubigeo_id"" = @ubigeo_id,
+                                            ""address"" = @address,
+                                            ""postal_code"" = @postal_code,                                            
+                                            ""modification_date"" = @modification_date,
+                                            ""modification_author"" = @modification_author
                                         WHERE 
-                                            Id= @Id ;";
+                                            id= @Id ;";
 
-                    int hasUpdate = await connection.ExecuteAsync(update, direction);
+                    int hasUpdate = await connection.ExecuteAsync(update, address);
                     if (hasUpdate <= 0)
                         Handlers.ExceptionClose(connection, "Ocurrió un error al actualizar la direccion");
 

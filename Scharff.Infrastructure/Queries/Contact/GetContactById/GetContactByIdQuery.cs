@@ -22,13 +22,13 @@ namespace Scharff.Infrastructure.Queries.Contact.GetContactById
                 {
                     string sql = @"SELECT 
 	                                tc.Id as Id,
-	                                tc.""nombreCompleto"" as nombreCompleto,
-	                                tpdac.""id"" as areaContacto_parametro,
-	                                tpdtc.""id"" as tipoContacto_parametro   
-                                    FROM public.contacto  as tc
-                                    INNER JOIN public.parametro_detalle tpdac on tpdac.id = tc.""areaContacto_parametro""
-                                    INNER JOIN public.parametro_detalle tpdtc on tpdtc.id = tc.""tipoContacto_parametro""
-                                    WHERE tc.Id = @Id and tc.estado = 'true'
+	                                tc.full_name as full_name,
+	                                tpdac.id as type_param,
+	                                tpdtc.id as area_param   
+                                    FROM nsf.contact  as tc
+                                    LEFT JOIN nsf.parameter tpdac on tpdac.id = tc.area_param
+                                    LEFT JOIN nsf.parameter tpdtc on tpdtc.id = tc.type_param
+                                    WHERE tc.Id = @Id and tc.status = 'true'
                                     ";
 
                     var queryArgs = new { Id };
@@ -51,9 +51,9 @@ namespace Scharff.Infrastructure.Queries.Contact.GetContactById
                 try
                 {
                     string sql = @"SELECT tc.Id as Id,
-                                    	  tc.telefono as telefono
-                                    FROM public.telefono_contacto tc
-                                    WHERE tc.""idContacto"" = @Id 
+                                    	  tc.telephone as telefono
+                                    FROM nsf.phone_contact tc
+                                    WHERE tc.""contact_id"" = @Id 
                                     ";
 
                     var queryArgs = new { Id };
@@ -78,8 +78,8 @@ namespace Scharff.Infrastructure.Queries.Contact.GetContactById
                 {
                     string sql = @"SELECT ec.Id as Id,
                                    	      ec.email as email
-                                   FROM public.email_contacto ec
-                                   WHERE ec.""idContacto"" = @Id 
+                                   FROM nsf.email_contact ec
+                                   WHERE ec.""contact_id"" = @Id 
                                     ";
 
                     var queryArgs = new { Id };
