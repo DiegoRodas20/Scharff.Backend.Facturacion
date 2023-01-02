@@ -20,7 +20,7 @@ namespace Scharff.API.Controllers
         {
             _mediator = mediator;
         }
-        [HttpGet(template: "GetList/{idClient}")]
+        [HttpGet(template: "all/{idClient}")]
         [SwaggerResponse(200, "Retorna un contacto en base a su ID", typeof(ContactModel))]
         [SwaggerResponse(204, "No se encontro el contacto")]
         [SwaggerResponse(400, "Ocurrio un error de validacion")]
