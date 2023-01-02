@@ -36,7 +36,7 @@ namespace Scharff.Infrastructure.Repositories.Direction.RegisterDirection
                                         VALUES 
                                             (@type_param, 
                                             @client_id,
-                                            @address) RETURNING Id;";
+                                            @address) RETURNING id;";
 
                     int idInsert = await connection.ExecuteScalarAsync<int>(insert, address);
                     trans.Complete();

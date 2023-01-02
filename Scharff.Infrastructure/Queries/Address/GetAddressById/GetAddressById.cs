@@ -21,7 +21,7 @@ namespace Scharff.Infrastructure.Queries.Direction.GetDirectionById
             {
                 try
                 {
-                    string sql = @"SELECT * FROM nsf.address WHERE id = @id";
+                    string sql = @"SELECT * FROM nsf.address WHERE ""id"" = @id";
                     var queryArgs = new { id };
                     IEnumerable <AddressModel> direction = await connection.QueryAsync<AddressModel>(sql, queryArgs);
                     return direction.ToList();

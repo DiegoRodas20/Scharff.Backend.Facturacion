@@ -20,7 +20,7 @@ namespace Scharff.Infrastructure.Queries.Address.GetAddressByIdClient
             {
                 try
                 {
-                    string sql = @"SELECT * FROM nsf.address WHERE client_id = @idClient";
+                    string sql = @"SELECT * FROM nsf.address WHERE ""client_id"" = @idClient";
                     var queryArgs = new { idClient };
                     IEnumerable<AddressModel> direction = await connection.QueryAsync<AddressModel>(sql, queryArgs);
                     return direction.ToList();
