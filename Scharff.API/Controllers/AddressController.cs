@@ -76,5 +76,17 @@ namespace Scharff.API.Controllers
             var result = await _mediator.Send(request);
             return Ok(result);
         }
+
+        [HttpGet(template: "{idClient, type}")]
+        [SwaggerResponse(200, "Retorna direcciones por tipo de dirección", typeof(CustomResponse<AddressModel>))]
+        [SwaggerResponse(204, "No se encontraron direcciones")]
+        [SwaggerResponse(400, "Ocurrio un error")]
+        public async Task<IActionResult> GetAddressByType(int idClient, int type)
+        {
+            GetAddressByTypeQuery request = new() { IdClient = idClient, Type = type };
+
+            var result = await _mediator.Send(request);
+            return Ok(new CustomResponse<AddressModel>($"Se encontraron direcciones con el tipo: {type}.", result));
+        }
     }
 }
