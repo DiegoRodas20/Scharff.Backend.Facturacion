@@ -20,9 +20,9 @@ namespace Scharff.Application.Commands.Contact.RegisterContact
             _registerPhoneContactRepository = registerPhoneContactRepository;
             _registerEmailContactRepository = registerEmailContactRepository;
         }
-        private async void RegisterContactPhones(int resultContact, List<RegisterPhoneContactModelDTO> requestPhones)
+        private async void RegisterContactPhones(int resultContact, List<RegisterPhoneContactModel> requestPhones)
         {
-            List<RegisterPhoneContactModelDTO> requestPhonesContact = requestPhones;
+            List<RegisterPhoneContactModel> requestPhonesContact = requestPhones;
 
             if (requestPhonesContact.Count() == 0) throw new ValidationException("Favor de ingresar un telefono");
 
@@ -34,7 +34,7 @@ namespace Scharff.Application.Commands.Contact.RegisterContact
                     {
                         creation_date = DateTime.Now,
                         contact_id = resultContact,
-                        telephone = item.telefono
+                        telephone = item.phone
                     };
 
                     var resultPhoneContact = await _registerPhoneContactRepository.RegisterPhoneContact(modelPhoneContact);
@@ -44,9 +44,10 @@ namespace Scharff.Application.Commands.Contact.RegisterContact
                 }
             }
         }
-        private async void RegisterContactEmails(int resultContact, List<RegisterEmailContactModelDTO> requestEmail)
+        
+        private async void RegisterContactEmails(int resultContact, List<RegisterEmailContactModel> requestEmail)
         {
-            List<RegisterEmailContactModelDTO> requestEmailsContact = requestEmail;
+            List<RegisterEmailContactModel> requestEmailsContact = requestEmail;
 
             if (requestEmailsContact.Count() == 0) throw new ValidationException("Favor de ingresar un email");
 
@@ -91,11 +92,9 @@ namespace Scharff.Application.Commands.Contact.RegisterContact
 
             if (resultContact > 0)
             {
-                RegisterContactPhones(resultContact, request.telefonosContacto);
-                RegisterContactEmails(resultContact, request.emailscontacto);
-
+                RegisterContactPhones(resultContact, request.phones_contact);
+                RegisterContactEmails(resultContact, request.emails_contact);
             }
-
             return resultContact;
         }
 

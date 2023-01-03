@@ -24,8 +24,6 @@ namespace Scharff.Infrastructure.Repositories.Contact.RegisterContact
                 try
                 {
 
-
-
                     string insert = @"  INSERT INTO nsf.contact 
                                            (""status"", 
                                             ""client_id"",

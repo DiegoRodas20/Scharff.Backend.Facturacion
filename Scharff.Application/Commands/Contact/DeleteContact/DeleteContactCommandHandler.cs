@@ -28,7 +28,6 @@ namespace Scharff.Application.Commands.Contact.DeleteContact
             };
 
             await _deletePhoneContactRepository.DeletePhoneContact(model.Id);
-
             await _deleteEmailContactRepository.DeleteEmailContact(model.Id);
 
             var resultContact = await _deleteContactRepository.DeleteContact(model.Id);

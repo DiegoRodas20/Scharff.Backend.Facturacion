@@ -15,24 +15,22 @@
         public int modification_author { get; set; }
         public DateTime? start_date { get; set; }
         public DateTime? end_date { get; set; }
-
-        public string telefono { get; set; }
+        public string phone { get; set; }
         public string email { get; set; }
 
 
         //Descripciones tabla Parametro
+        public string description_type_contact { get; set; }
+        public string description_area_contact { get; set; }
 
-        public string descripcionTipoContacto { get; set; }
-        public string descripcionAreaContacto { get; set; }
+        public List<GetPhoneContactModelDTO> phones_contact { get; set; }
 
-        public List<GetPhoneContactModelDTO> telefonosContacto { get; set; }
-
-        public List<GetEmailContactModelDTO> emailscontacto { get; set; }
+        public List<GetEmailContactModelDTO> emails_contact { get; set; }
 
         public class GetPhoneContactModelDTO
         {
             public int Id { get; set; }
-            public string telefono { get; set; }
+            public string phone { get; set; }
 
         }
         public class GetEmailContactModelDTO

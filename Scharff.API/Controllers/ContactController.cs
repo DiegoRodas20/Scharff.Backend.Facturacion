@@ -21,7 +21,7 @@ namespace Scharff.API.Controllers
             _mediator = mediator;
         }
         [HttpGet(template: "all/{idClient}")]
-        [SwaggerResponse(200, "Retorna un contacto en base a su ID", typeof(ContactModel))]
+        [SwaggerResponse(200, "Retorna un contacto en base a su ID", typeof(List<ContactModel>))]
         [SwaggerResponse(204, "No se encontro el contacto")]
         [SwaggerResponse(400, "Ocurrio un error de validacion")]
         public async Task<IActionResult> GetContactsByIdClient(int idClient)

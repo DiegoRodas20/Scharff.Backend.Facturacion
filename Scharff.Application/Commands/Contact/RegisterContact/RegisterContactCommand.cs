@@ -9,23 +9,16 @@ namespace Scharff.Application.Commands.Contact.RegisterContact
         public int area_param { get; set; }
         public string? full_name { get; set; }
         public string? comment { get; set; }
-
-        public List<RegisterPhoneContactModelDTO> telefonosContacto { get; set; }
-
-        public List<RegisterEmailContactModelDTO> emailscontacto { get; set; }
-
-
-        //public int autorCreacion { get; set; }
-        //public DateTime? fechaInicio { get; set; }
-        //public DateTime? fechaFin { get; set; }
+        public List<RegisterPhoneContactModel> phones_contact { get; set; }
+        public List<RegisterEmailContactModel> emails_contact { get; set; }
 
     }
-    public class RegisterPhoneContactModelDTO
+    public class RegisterPhoneContactModel
     {
-        public string telefono { get; set; }
+        public string phone { get; set; }
 
     }
-    public class RegisterEmailContactModelDTO
+    public class RegisterEmailContactModel
     {
         public string email { get; set; }
 

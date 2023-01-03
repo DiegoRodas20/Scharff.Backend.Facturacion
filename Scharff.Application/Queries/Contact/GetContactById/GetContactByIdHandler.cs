@@ -24,8 +24,8 @@ namespace Scharff.Application.Queries.Contact.GetContactById
                 var resultPhonesContact = await _getContactByIdQuery.GetPhonesById(request.Id);
                 var resultEmailsContact = await _getContactByIdQuery.GetEmailsById(request.Id);
 
-                if (resultPhonesContact.Count() > 0) resultContact.telefonosContacto = resultPhonesContact;
-                if (resultEmailsContact.Count() > 0) resultContact.emailscontacto = resultEmailsContact;
+                if (resultPhonesContact.Count() > 0) resultContact.phones_contact = resultPhonesContact;
+                if (resultEmailsContact.Count() > 0) resultContact.emails_contact = resultEmailsContact;
             }
 
             return resultContact;

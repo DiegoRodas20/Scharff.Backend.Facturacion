@@ -22,7 +22,7 @@ namespace Scharff.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet(template: "GetList/{idClient}")]
+        [HttpGet(template: "all/{idClient}")]
         [SwaggerResponse(200, "Retorna una direccion en base a su id cliente", typeof(AddressModel))]
         [SwaggerResponse(204, "No se encontro direcciones")]
         [SwaggerResponse(400, "Ocurrio un error de validacion")]
