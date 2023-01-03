@@ -21,7 +21,8 @@ namespace Scharff.Infrastructure.Queries.Address.GetAddressByIdClient
                 try
                 {
                     string sql = @" SELECT 
-                                            a.address
+                                            a.id
+                                            ,a.address
                                             ,a.postal_code
                                             ,u.code as ubigeo_code_description
                                             ,pro.description as province_description
