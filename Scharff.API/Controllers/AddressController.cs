@@ -70,22 +70,11 @@ namespace Scharff.API.Controllers
 
         [HttpDelete(template: "{id}")]
         [SwaggerOperation("Eliminar direccion")]
-        public async Task<IActionResult> DeleteAddress(int id)
+        public async Task<IActionResult> DeleteAddress(int id, [FromBody] DeleteAddressCommand request)
         {
-            var result = await _mediator.Send(new DeleteAddressCommand() { Id = id });
-            return Ok(new CustomResponse<int>($"Se elimino la direccion con id: {result}.", result));
-        }
-
-        [HttpGet(template: "{idClient,type}")]
-        [SwaggerResponse(200, "Retorna direcciones por Tipo de Dirección", typeof(CustomResponse<AddressModel>))]
-        [SwaggerResponse(204, "No se encontraron direcciones")]
-        [SwaggerResponse(400, "Ocurrio un error")]
-        public async Task<IActionResult> GetAddressByType(int idClient, int type)
-        {
-            GetAddressByTypeQuery request = new() { IdClient = idClient, Type = type };
-
+            request.Id = id;
             var result = await _mediator.Send(request);
-            return Ok(new CustomResponse<AddressModel>($"Se encontraron direcciones con tipo: {type}.", result));
+            return Ok(result);
         }
     }
 }
