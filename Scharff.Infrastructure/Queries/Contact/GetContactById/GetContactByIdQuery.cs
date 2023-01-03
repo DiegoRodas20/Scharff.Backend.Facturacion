@@ -21,13 +21,16 @@ namespace Scharff.Infrastructure.Queries.Contact.GetContactById
                 try
                 {
                     string sql = @"SELECT 
-	                                tc.Id as Id,
-	                                tc.full_name as full_name,
-	                                tpdac.id as type_param,
-	                                tpdtc.id as area_param   
+	                                tc.Id ,
+	                                tc.client_id ,
+	                                tc.full_name ,
+	                                tc.type_param ,
+	                                tc.area_param ,
+	                                tc.status ,
+	                                tc.creation_date,
+                                    tc.comment ,  
+                                    tc.modification_date 
                                     FROM nsf.contact  as tc
-                                    LEFT JOIN nsf.parameter tpdac on tpdac.id = tc.area_param
-                                    LEFT JOIN nsf.parameter tpdtc on tpdtc.id = tc.type_param
                                     WHERE tc.Id = @Id and tc.status = 'true'
                                     ";
 
@@ -50,8 +53,8 @@ namespace Scharff.Infrastructure.Queries.Contact.GetContactById
             {
                 try
                 {
-                    string sql = @"SELECT tc.Id as Id,
-                                    	  tc.telephone as telefono
+                    string sql = @"SELECT tc.Id ,
+                                    	  tc.telephone
                                     FROM nsf.phone_contact tc
                                     WHERE tc.""contact_id"" = @Id 
                                     ";
@@ -76,8 +79,8 @@ namespace Scharff.Infrastructure.Queries.Contact.GetContactById
             {
                 try
                 {
-                    string sql = @"SELECT ec.Id as Id,
-                                   	      ec.email as email
+                    string sql = @"SELECT ec.Id ,
+                                   	      ec.email
                                    FROM nsf.email_contact ec
                                    WHERE ec.""contact_id"" = @Id 
                                     ";

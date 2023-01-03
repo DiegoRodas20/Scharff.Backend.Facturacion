@@ -15,7 +15,7 @@
         public int modification_author { get; set; }
         public DateTime? start_date { get; set; }
         public DateTime? end_date { get; set; }
-        public string phone { get; set; }
+        public string telephone { get; set; }
         public string email { get; set; }
 
 
@@ -30,7 +30,7 @@
         public class GetPhoneContactModelDTO
         {
             public int Id { get; set; }
-            public string phone { get; set; }
+            public string telephone { get; set; }
 
         }
         public class GetEmailContactModelDTO
