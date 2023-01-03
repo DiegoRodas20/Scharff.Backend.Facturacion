@@ -21,7 +21,7 @@ namespace Scharff.Application.Queries.Direction.GetDirectionById
         }
         public async Task<List<AddressModel>> Handle(GetAddressByIdQuery request, CancellationToken cancellationToken)
         {
-            var result = await _getDirectionByIdQuery.GetDirectionByID(request.Id);
+            var result = await _getDirectionByIdQuery.GetDirectionByID(request.id);
             return result;
         }
     }

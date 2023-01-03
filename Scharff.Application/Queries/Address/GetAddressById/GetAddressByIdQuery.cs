@@ -6,7 +6,7 @@ namespace Scharff.Application.Queries.Direction.GetDirectionById
 {
     public class GetAddressByIdQuery : IRequest<List<AddressModel>>
     {
-        public int Id { get; set; }
+        public int id { get; set; }
 
     }
 }
