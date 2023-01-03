@@ -2,7 +2,7 @@
 using Npgsql;
 using Scharff.API.Utils.GlobalHandlers;
 using Scharff.Infrastructure.Queries.Address.GetAddressByIdClient;
-
+using Scharff.Infrastructure.Queries.Client.GetAddressByType;
 using Scharff.Infrastructure.Queries.Client.GetAllClients;
 using Scharff.Infrastructure.Queries.Client.GetClientById;
 using Scharff.Infrastructure.Queries.Contact.GetContactById;
@@ -75,6 +75,9 @@ builder.Services.AddTransient(typeof(IGetAddressById), typeof(GetAddressById));
 
 builder.Services.AddTransient(typeof(IUpdateDirectionRepository), typeof(UpdateDirectionRepository));
 builder.Services.AddTransient(typeof(IDeleteAddressRepository), typeof(DeleteAddressRepository));
+
+builder.Services.AddTransient(typeof(IGetAddressByTypeQuery), typeof(GetAddressByTypeQuery));
+
 
 builder.Services.AddTransient(typeof(IVerifyIdentityClientQuery), typeof(VerifyIdentityClientQuery));
 

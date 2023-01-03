@@ -42,12 +42,12 @@ namespace Scharff.Infrastructure.Queries.Client.GetClientById
 										F.description as segmentation_code_description
 									FROM 
 										nsf.client A INNER JOIN
-										nsf.parameter B ON B.detail_id = A.corporate_group_param and B.group_id = 1 INNER JOIN
-										nsf.parameter C ON C.detail_id = A.industry_code_param and C.group_id = 2 INNER JOIN
-										nsf.parameter D ON D.detail_id = A.currency_type and D.group_id = 3 INNER JOIN
-										nsf.parameter E ON E.detail_id = A.holding_param and E.group_id = 4 INNER JOIN
-										nsf.parameter F ON F.detail_id = A.segmentation_code_param and F.group_id = 5 INNER JOIN
-										nsf.parameter G ON G.detail_id = A.document_type_id and G.group_id = 6
+										nsf.parameter_detail B ON B.id = A.corporate_group_param INNER JOIN
+										nsf.parameter_detail C ON C.id = A.industry_code_param INNER JOIN
+										nsf.parameter_detail D ON D.id = A.currency_type INNER JOIN
+										nsf.parameter_detail E ON E.id = A.holding_param INNER JOIN
+										nsf.parameter_detail F ON F.id = A.segmentation_code_param INNER JOIN
+										nsf.parameter_detail G ON G.id = A.document_type_id
 									WHERE
 										A.id = @idClient";
 

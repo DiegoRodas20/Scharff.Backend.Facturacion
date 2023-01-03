@@ -6,6 +6,7 @@ using Scharff.Application.Commands.Direction.DeleteDirection;
 using Scharff.Application.Commands.Direction.RegisterDirection;
 using Scharff.Application.Commands.Direction.UpdateDirection;
 using Scharff.Application.Queries.Address.GetAddressByIdClient;
+using Scharff.Application.Queries.Client.GetAddressByType;
 using Scharff.Application.Queries.Direction.GetDirectionById;
 using Scharff.Domain.Entities;
 using Swashbuckle.AspNetCore.Annotations;
@@ -73,6 +74,18 @@ namespace Scharff.API.Controllers
             request.Id = id;
             var result = await _mediator.Send(request);
             return Ok(result);
+        }
+
+        [HttpGet(template: "{idClient,type}")]
+        [SwaggerResponse(200, "Retorna direcciones por Tipo de Dirección", typeof(CustomResponse<AddressModel>))]
+        [SwaggerResponse(204, "No se encontraron direcciones")]
+        [SwaggerResponse(400, "Ocurrio un error")]
+        public async Task<IActionResult> GetAddressByType(int idClient, int type)
+        {
+            GetAddressByTypeQuery request = new() { IdClient = idClient, Type = type };
+
+            var result = await _mediator.Send(request);
+            return Ok(new CustomResponse<AddressModel>($"Se encontraron direcciones con tipo: {type}.", result));
         }
     }
 }

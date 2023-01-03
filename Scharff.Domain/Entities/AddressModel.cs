@@ -14,5 +14,8 @@
         public int? creation_author { get; set; }
         public DateTime? modification_date { get; set; }
         public int? modification_author { get; set; }
+
+        //Descripciones tabla Parametro
+        public string type_address { get; set; }
     }
 }
