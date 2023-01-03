@@ -14,5 +14,15 @@
         public int? creation_author { get; set; }
         public DateTime? modification_date { get; set; }
         public int? modification_author { get; set; }
+
+        public int unit_id { get; set; }
+        public string? ubigeo_code_description { get; set; }
+        public string? province_description { get; set; }
+        public string? address_type_description { get; set; }
+        public string? department_description { get; set; }
+        public string? district_description { get; set; }
+
+        public int province_id { get; set; }
+        public int district_id { get; set; }
     }
 }
