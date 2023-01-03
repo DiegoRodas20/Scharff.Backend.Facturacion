@@ -34,6 +34,7 @@ namespace Scharff.Infrastructure.Repositories.Direction.RegisterDirection
                                             client_id,
                                             unit_id,
                                             address,
+                                            status,
                                             creation_date,
                                             creation_author
                                             )
@@ -41,7 +42,8 @@ namespace Scharff.Infrastructure.Repositories.Direction.RegisterDirection
                                             (@type_param, 
                                             @client_id,
                                             @unit_id,
-                                            @address
+                                            @address,
+                                            @status,
                                             @creation_date,
                                             @creation_author
                                             ) RETURNING id;";

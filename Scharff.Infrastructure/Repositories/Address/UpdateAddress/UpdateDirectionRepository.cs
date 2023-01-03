@@ -38,7 +38,7 @@ namespace Scharff.Infrastructure.Repositories.Direction.UpdateDirection
                                             address = @address,
                                             postal_code = @postal_code,   
                                             unit_id = @unit_id,  
-                                            estatu=@status,
+                                            status=@status,
                                             modification_date = @modification_date,
                                             modification_author = @modification_author
                                         WHERE 

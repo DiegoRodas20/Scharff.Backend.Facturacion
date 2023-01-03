@@ -19,7 +19,7 @@
         public string? ubigeo_code_description { get; set; }
         public string? province_description { get; set; }
         public string? address_type_description { get; set; }
-        public string? department_description { get; set; }
+        public string? status_description { get; set; }
         public string? district_description { get; set; }
 
         public int province_id { get; set; }

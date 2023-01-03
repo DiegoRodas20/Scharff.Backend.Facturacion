@@ -15,6 +15,7 @@ namespace Scharff.Application.Commands.Direction.UpdateDirection
         public int type_param { get; set; }
         public int client_id { get; set; }
         public int ubigeo_id { get; set; }
+        public int unit_id { get; set; }
         public string address { get; set; }
         public string postal_code { get; set; }
      
