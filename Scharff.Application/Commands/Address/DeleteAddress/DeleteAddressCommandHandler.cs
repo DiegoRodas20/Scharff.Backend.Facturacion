@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace Scharff.Application.Commands.Direction.DeleteDirection
 {
-    public class DeleteAddressCommandHandler : IRequestHandler<DeleteAddressCommand, ResponseModel>
+    public class DeleteAddressCommandHandler : IRequestHandler<DeleteAddressCommand, int>
     {
         private readonly IDeleteAddressRepository _deleteAddressRepository;
         public DeleteAddressCommandHandler(IDeleteAddressRepository deleteAddressRepository)
         {
             _deleteAddressRepository = deleteAddressRepository;
         }
-        public async Task<ResponseModel> Handle(DeleteAddressCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(DeleteAddressCommand request, CancellationToken cancellationToken)
         {
             AddressModel model = new()
             {

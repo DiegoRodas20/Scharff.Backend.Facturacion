@@ -85,6 +85,9 @@ builder.Services.AddTransient(typeof(IVerifyIdentityClientQuery), typeof(VerifyI
 Assembly application = AppDomain.CurrentDomain.Load("Scharff.Application");
 builder.Services.AddMediatR(application);
 
+builder.Services.AddAutoMapper(typeof(Program));
+
+
 var app = builder.Build();
 
 //if (app.Environment.IsDevelopment())

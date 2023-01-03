@@ -27,6 +27,7 @@ namespace Scharff.Application.Commands.Direction.UpdateDirection
                 type_param = request.type_param,
                 client_id = request.client_id,
                 ubigeo_id = request.ubigeo_id,
+                unit_id=request.unit_id,
                 address = request.address,
                 postal_code = request.postal_code,
                 modification_date = request.modification_date,

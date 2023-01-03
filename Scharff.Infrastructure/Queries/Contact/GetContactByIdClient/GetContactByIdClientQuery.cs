@@ -22,13 +22,21 @@ namespace Scharff.Infrastructure.Queries.Contact.GetContactById
                         string sql = @"  SELECT 
 	                                         tc.Id,
 	                                         tc.full_name,
-	                                         tpdac.description as description_area_contact,
-	                                         tpdtc.description as description_type_contact,
-	                                         ttc.telephone as phone,
-	                                         tec.email as email	   
+	                                         TRIM(tpdac.description) as description_area_contact,
+	                                         TRIM(tpdtc.description) as description_type_contact,
+	                                         ttc.telephone,
+	                                         tec.email ,
+                                             tc.creation_date ,
+                                             tc.status,
+                                             tc.client_id ,
+                                             tc.type_param,
+                                             tc.area_param,
+                                             tc.comment,
+                                             tc.modification_date          
+
                                          FROM nsf.contact  as tc
-                                             LEFT JOIN nsf.parameter tpdac on tpdac.id = tc.area_param
-                                             LEFT JOIN nsf.parameter tpdtc on tpdtc.id = tc.type_param
+                                             LEFT JOIN nsf.parameter_detail tpdac on tpdac.id = tc.area_param 
+                                             LEFT JOIN nsf.parameter_detail tpdtc on tpdtc.id = tc.type_param 
                                              INNER JOIN LATERAL  
                                              (
                                              	SELECT tmptc.contact_id,tmptc.id,tmptc.telephone

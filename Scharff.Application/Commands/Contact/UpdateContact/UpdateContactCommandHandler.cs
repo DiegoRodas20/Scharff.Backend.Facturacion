@@ -32,7 +32,7 @@ namespace Scharff.Application.Commands.Contact.UpdateContact
                     PhoneContactModel modelPhoneContact = new()
                     {
                         modification_date = DateTime.Now,
-                        telephone = item.telefono,
+                        telephone = item.telephone,
                         Id = item.Id
                     };
 
@@ -88,8 +88,8 @@ namespace Scharff.Application.Commands.Contact.UpdateContact
             if (resultContact <= 0) throw new ValidationException("Ocurrio un error al actualizar el contacto");
 
 
-            UpdateContactPhones(request.telefonosContacto);
-            UpdateContactEmails(request.emailscontacto);
+            UpdateContactPhones(request.phones_contact);
+            UpdateContactEmails(request.emails_contact);
 
 
             return model.Id;

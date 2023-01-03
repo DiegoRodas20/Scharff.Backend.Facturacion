@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Scharff.API.Utils.Models;
 using Scharff.Application.Commands.Contact.DeleteContact;
@@ -6,6 +7,8 @@ using Scharff.Application.Commands.Contact.RegisterContact;
 using Scharff.Application.Commands.Contact.UpdateContact;
 using Scharff.Application.Queries.Contact.GetContactById;
 using Scharff.Application.Queries.Contact.GetContactoById;
+using Scharff.Domain.DTO.Contact.GetContactById;
+using Scharff.Domain.DTO.Contact.GetContactByIdClient;
 using Scharff.Domain.Entities;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -16,9 +19,13 @@ namespace Scharff.API.Controllers
     public class ContactController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public ContactController(IMediator mediator)
+        private readonly IMapper _mapper;
+
+        public ContactController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
+
         }
         [HttpGet(template: "all/{idClient}")]
         [SwaggerResponse(200, "Retorna un contacto en base a su ID", typeof(List<ContactModel>))]
@@ -29,7 +36,9 @@ namespace Scharff.API.Controllers
             GetContactByIdClientQuery request = new() { IdClient = idClient };
 
             var result = await _mediator.Send(request);
-            return Ok(new CustomResponse<List<ContactModel>>($"Se encontraron los contactos con el id cliente: {idClient}.", result));
+            var responseMapper = _mapper.Map<List<ContactModel>, List<GetContactByIdClientDTO>>(result);
+
+            return Ok(new CustomResponse<List<GetContactByIdClientDTO>>($"Se encontraron los contactos con el id cliente: {idClient}.", responseMapper));
         }
 
         [HttpGet(template: "{id}")]
@@ -41,7 +50,9 @@ namespace Scharff.API.Controllers
             GetContactByIdQuery request = new() { Id = id };
 
             var result = await _mediator.Send(request);
-            return Ok(new CustomResponse<ContactModel>($"Se encontro el contacto: {id}.", result));
+            var responseMapper = _mapper.Map<ContactModel, GetContactByIdDTO>(result);
+
+            return Ok(new CustomResponse<GetContactByIdDTO>($"Se encontro el contacto: {id}.", responseMapper));
         }
 
         [HttpPost]
