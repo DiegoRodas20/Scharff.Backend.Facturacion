@@ -32,11 +32,19 @@ namespace Scharff.Infrastructure.Repositories.Direction.RegisterDirection
                     string insert = @"  INSERT INTO nsf.address 
                                             (type_param,
                                             client_id,
-                                            address)
+                                            unit_id,
+                                            address,
+                                            creation_date,
+                                            creation_author
+                                            )
                                         VALUES 
                                             (@type_param, 
                                             @client_id,
-                                            @address) RETURNING id;";
+                                            @unit_id,
+                                            @address
+                                            @creation_date,
+                                            @creation_author
+                                            ) RETURNING id;";
 
                     int idInsert = await connection.ExecuteScalarAsync<int>(insert, address);
                     trans.Complete();

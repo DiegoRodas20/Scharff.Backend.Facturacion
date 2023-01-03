@@ -33,12 +33,14 @@ namespace Scharff.Infrastructure.Repositories.Direction.UpdateDirection
 
                     string update = @"  UPDATE nsf.address 
                                         SET 
-                                            ""type_param"" = @type_param,                                            
-                                            ""ubigeo_id"" = @ubigeo_id,
-                                            ""address"" = @address,
-                                            ""postal_code"" = @postal_code,                                            
-                                            ""modification_date"" = @modification_date,
-                                            ""modification_author"" = @modification_author
+                                            type_param = @type_param,                                            
+                                            ubigeo_id = @ubigeo_id,
+                                            address = @address,
+                                            postal_code = @postal_code,   
+                                            unit_id = @unit_id,  
+                                            estatu=@status,
+                                            modification_date = @modification_date,
+                                            modification_author = @modification_author
                                         WHERE 
                                             id= @Id ;";
 

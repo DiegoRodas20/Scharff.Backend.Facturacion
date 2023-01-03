@@ -9,7 +9,7 @@ namespace Scharff.Infrastructure.Repositories.Direction.DeleteDirection
 {
     public  interface IDeleteAddressRepository
     {
-        Task<ResponseModel> DeleteAddress(int Id);
+        Task<int> DeleteAddress(int Id);
 
     }
 }

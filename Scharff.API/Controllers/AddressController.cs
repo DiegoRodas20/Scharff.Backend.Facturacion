@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Scharff.API.Utils.Models;
+using Scharff.Application.Commands.Contact.DeleteContact;
 using Scharff.Application.Commands.Direction.DeleteDirection;
 using Scharff.Application.Commands.Direction.RegisterDirection;
 using Scharff.Application.Commands.Direction.UpdateDirection;
@@ -68,11 +69,10 @@ namespace Scharff.API.Controllers
 
         [HttpDelete(template: "{id}")]
         [SwaggerOperation("Eliminar direccion")]
-        public async Task<IActionResult> DeleteAddress(int id, [FromBody] DeleteAddressCommand request)
+        public async Task<IActionResult> DeleteAddress(int id)
         {
-            request.Id = id;
-            var result = await _mediator.Send(request);
-            return Ok(result);
+            var result = await _mediator.Send(new DeleteAddressCommand() { Id = id });
+            return Ok(new CustomResponse<int>($"Se elimino la direccion con id: {result}.", result));
         }
     }
 }

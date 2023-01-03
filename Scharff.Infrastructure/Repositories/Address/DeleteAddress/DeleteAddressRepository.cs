@@ -20,7 +20,7 @@ namespace Scharff.Infrastructure.Repositories.Direction.DeleteDirection
         {
             _connection = connection;
         }
-        public async Task<ResponseModel> DeleteAddress(int Id)
+        public async Task<int> DeleteAddress(int Id)
         {
             using (TransactionScope trans = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             using (IDbConnection connection = new NpgsqlConnection(_connection.ConnectionString))
@@ -34,10 +34,9 @@ namespace Scharff.Infrastructure.Repositories.Direction.DeleteDirection
                                         ""id""= @Id ;";
                     var queryArgs = new { Id };
                     int hasDelete = await connection.ExecuteAsync(delete, queryArgs);
-                    if (hasDelete <= 0)
-                        Handlers.ExceptionClose(connection, "Ocurrió un error al eliminar la direccion");
+                    trans.Complete();
 
-                    return Handlers.CloseConnection(connection, trans, "Eliminar exitoso");
+                    return hasDelete;
                 }
                 catch (NpgsqlException err)
                 {
