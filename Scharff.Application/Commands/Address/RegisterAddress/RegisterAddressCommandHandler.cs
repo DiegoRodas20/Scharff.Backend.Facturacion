@@ -25,12 +25,12 @@ namespace Scharff.Application.Commands.Direction.RegisterDirection
             AddressModel model = new()
             {
                 client_id = request.client_id,
-                type_param = request.type_param,                
-                unit_id=request.unit_id,
+                type_param = request.type_param,
+                unit_id = request.unit_id,
                 address = request.address,
-                status=request.status,
-                creation_date=request.creation_date,
-                creation_author=request.creation_author
+                status = request.status,
+                creation_date = request.creation_date,
+                creation_author = request.creation_author
             };
 
             var result = await _registerAddressRepository.RegisterAddress(model);
