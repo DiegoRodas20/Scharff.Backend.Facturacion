@@ -2,7 +2,6 @@
 using Npgsql;
 using Scharff.Domain.Entities;
 using System.Data;
-using System.Net.Sockets;
 
 
 namespace Scharff.Infrastructure.Queries.Direction.GetDirectionById
