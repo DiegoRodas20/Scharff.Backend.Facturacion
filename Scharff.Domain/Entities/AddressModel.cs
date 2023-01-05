@@ -18,5 +18,11 @@
 
         //Descripciones tabla Parametro
         public string type_address { get; set; }
+        public string district_id { get; set; }
+        public string ubigeo_code_description { get; set; }
+        public string province_description { get; set; }
+        public string status_description { get; set; }
+        public string district_description { get; set; }
+        public int province_id { get; set; }
     }
 }

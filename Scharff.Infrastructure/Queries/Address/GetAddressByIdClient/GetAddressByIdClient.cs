@@ -26,7 +26,7 @@ namespace Scharff.Infrastructure.Queries.Address.GetAddressByIdClient
                                             ,a.postal_code
                                             ,u.code as ubigeo_code_description
                                             ,pro.description as province_description
-                                            ,p.description as address_type_description                                            
+                                            ,p.description as type_address                                            
                                             ,case a.status when 'true' then 'Activo' else 'Inactivo'end as status_description
                                             ,u.description  as district_description
 	                                FROM nsf.address  a

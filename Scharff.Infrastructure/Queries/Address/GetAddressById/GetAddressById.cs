@@ -30,6 +30,7 @@ namespace Scharff.Infrastructure.Queries.Direction.GetDirectionById
                                     ,pro.id as province_id
                                     ,a.ubigeo_id as district_id
                                     ,a.status
+                                    ,a.ubigeo_id
 	                               FROM nsf.address  a
 	                               LEFT JOIN nsf.ubigeo u ON u.id=a.ubigeo_id
 	                               LEFT JOIN nsf.ubigeo pro ON pro.id=u.parent_id
